@@ -1,0 +1,5 @@
+variable,param,備考
+b_jutakuchika,-0.4937,住宅地価
+b_jutaku_area,0.1493,居住面積
+b_tukene,0.6539,付け根地代
+b_pop,-4.92E-04,人口
