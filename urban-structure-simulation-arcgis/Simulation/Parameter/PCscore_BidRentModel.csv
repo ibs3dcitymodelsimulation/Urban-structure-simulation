@@ -1,0 +1,12 @@
+variable,rotation.PC1,rotation.PC2
+Avg_Dist_Zone_to_PreSchool,0.318754141,-0.25086444
+Avg_Dist_Zone_to_ElementarySchool,0.318156223,-0.315912086
+Avg_Dist_Zone_to_Library,0.306367444,-0.060971882
+Avg_Dist_Zone_to_MiddleSchool,0.302009482,-0.303556248
+Avg_Dist_Zone_to_Hospital,0.335446007,-0.027661507
+Avg_Dist_Zone_to_Clinic,0.32657243,-0.299535146
+Avg_Dist_sta_centre,0.321338864,0.293188106
+Avg_Dist_sta_main,0.224364807,-0.191152528
+Avg_Dist_sta_other,0.251457107,0.46115618
+ACC_car,-0.312029028,-0.330491558
+ACC_transit,-0.280601281,-0.45445342

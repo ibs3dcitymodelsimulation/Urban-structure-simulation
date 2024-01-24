@@ -1,0 +1,5 @@
+variable,param
+parameter_NoHouseholdChange,-0.4052
+parameter_FromNonSingleToSingle,0.8577
+parameter_FromNonFamilyToFamily,0.7558
+parameter_constant,-1.1128
