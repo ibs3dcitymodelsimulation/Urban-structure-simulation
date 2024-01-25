@@ -47,7 +47,7 @@ OTHER_TYPES = (
     454,
     461,
 )
-VALCANT_TYPE = None
+VACANT_TYPES = (None, -1)
 
 # 建築物用途名（詳細塗分け用）
 # シミュレーションの対象ではない用途は変わらないため取り扱わない。（変化なしとなる）
@@ -110,9 +110,9 @@ HEIGHT_FIELDS = [
 
 class UsageChange(Enum):
     UNCHANGED = "変わらない"
-    VALCANT_TO_RESIDENCE = "空地→住宅"
-    VALCANT_TO_OTHER = "空地→住宅以外"
-    TO_VALCANT = "空地になる"
+    VACANT_TO_RESIDENCE = "空地→住宅"
+    VACANT_TO_OTHER = "空地→住宅以外"
+    TO_VACANT = "空地になる"
     RESIDENCE_TO_OTHER = "住宅→住宅以外"
     OTHER_TO_RESIDENCE = "住宅以外→住宅"
     OTHER_TO_OTHER = "住宅以外→住宅以外"
@@ -764,14 +764,14 @@ def compare_usage(obj: Optional[int], sbj: Optional[int]):
     if obj == sbj or (obj in RESIDENCE_TYPES and sbj in RESIDENCE_TYPES):
         return UsageChange.UNCHANGED.value
 
-    if obj == VALCANT_TYPE:
+    if obj in VACANT_TYPES:
         if sbj in RESIDENCE_TYPES:
-            return UsageChange.VALCANT_TO_RESIDENCE.value
+            return UsageChange.VACANT_TO_RESIDENCE.value
         if sbj in OTHER_TYPES:
-            return UsageChange.VALCANT_TO_OTHER.value
+            return UsageChange.VACANT_TO_OTHER.value
 
-    if sbj == VALCANT_TYPE:
-        return UsageChange.TO_VALCANT.value
+    if sbj in VACANT_TYPES:
+        return UsageChange.TO_VACANT.value
 
     if obj in RESIDENCE_TYPES and sbj in OTHER_TYPES:
         return UsageChange.RESIDENCE_TO_OTHER.value
