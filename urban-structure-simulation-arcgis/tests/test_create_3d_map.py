@@ -16,10 +16,10 @@ def test_get_year():
 
 
 def test_compare_usage():
-    residence = [
+    residences = [
         411,
     ]
-    other = [
+    others = [
         412,
         413,
         414,
@@ -38,22 +38,25 @@ def test_compare_usage():
         454,
         461,
     ]
-    valcant = None
-    for x in residence:
-        assert create_3d_map.compare_usage(valcant, x) == "空地→住宅"
-    for x in other:
-        assert create_3d_map.compare_usage(valcant, x) == "空地→住宅以外"
-    for x in [*residence, *other]:
-        assert create_3d_map.compare_usage(x, valcant) == "空地になる"
-    for x in residence:
-        for y in other:
+    vacants = [None, -1]
+    for vacant in vacants:
+        for x in residences:
+            assert create_3d_map.compare_usage(vacant, x) == "空地→住宅"
+    for vacant in vacants:
+        for x in others:
+            assert create_3d_map.compare_usage(vacant, x) == "空地→住宅以外"
+    for vacant in vacants:
+        for x in [*residences, *others]:
+            assert create_3d_map.compare_usage(x, vacant) == "空地になる"
+    for x in residences:
+        for y in others:
             assert create_3d_map.compare_usage(x, y) == "住宅→住宅以外"
             assert create_3d_map.compare_usage(y, x) == "住宅以外→住宅"
-    for xs in itertools.combinations(other, 2):
+    for xs in itertools.combinations(others, 2):
         assert create_3d_map.compare_usage(*xs) == "住宅以外→住宅以外"
-    for x in [*residence, *other]:
+    for x in [*residences, *others]:
         assert create_3d_map.compare_usage(x, x) == "変わらない"
-    for xs in itertools.combinations(residence, 2):
+    for xs in itertools.combinations(residences, 2):
         assert create_3d_map.compare_usage(*xs) == "変わらない"
 
 
