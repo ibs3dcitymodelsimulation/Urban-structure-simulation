@@ -760,29 +760,20 @@ def apply_buildingID():
                 table.updateRow(rows)
 
 
-def compare_usage(obj: Optional[int], sbj: Optional[int]):
-    if obj == sbj or (obj in RESIDENCE_TYPES and sbj in RESIDENCE_TYPES):
+def compare_usage(detail: str):
+    if detail == UsageChange.UNCHANGED.value:
         return UsageChange.UNCHANGED.value
-
-    if obj in VACANT_TYPES:
-        if sbj in RESIDENCE_TYPES:
-            return UsageChange.VACANT_TO_RESIDENCE.value
-        if sbj in OTHER_TYPES:
-            return UsageChange.VACANT_TO_OTHER.value
-
-    if sbj in VACANT_TYPES:
+    if detail == UsageChange.VACANT_TO_RESIDENCE.value:
+        return UsageChange.VACANT_TO_RESIDENCE.value
+    if detail.startswith("空地→"):
+        return UsageChange.VACANT_TO_OTHER.value
+    if detail.endswith("→空地"):
         return UsageChange.TO_VACANT.value
-
-    if obj in RESIDENCE_TYPES and sbj in OTHER_TYPES:
+    if detail.startswith("住宅→"):
         return UsageChange.RESIDENCE_TO_OTHER.value
-
-    if obj in OTHER_TYPES and sbj in RESIDENCE_TYPES:
+    if detail.endswith("→住宅"):
         return UsageChange.OTHER_TO_RESIDENCE.value
-
-    if obj in OTHER_TYPES and sbj in OTHER_TYPES:
-        return UsageChange.OTHER_TO_OTHER.value
-
-    return None
+    return UsageChange.OTHER_TO_OTHER.value
 
 
 def compare_usage_detail(obj: Optional[int], sbj: Optional[int]):
@@ -792,7 +783,7 @@ def compare_usage_detail(obj: Optional[int], sbj: Optional[int]):
         or sbj not in VIZ_USAGE_NAMES
         or VIZ_USAGE_NAMES[obj] == VIZ_USAGE_NAMES[sbj]
     ):
-        return "変わらない"
+        return UsageChange.UNCHANGED.value
     return f"{VIZ_USAGE_NAMES[obj]}→{VIZ_USAGE_NAMES[sbj]}"
 
 
@@ -808,8 +799,9 @@ def set_compared_usage():
         ],
     ) as table:
         for rows in table:
-            rows[2] = compare_usage(rows[0], rows[1])
-            rows[3] = compare_usage_detail(rows[0], rows[1])
+            detail = compare_usage_detail(rows[0], rows[1])
+            rows[2] = compare_usage(detail)
+            rows[3] = detail
             table.updateRow(rows)
 
 
