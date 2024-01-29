@@ -75,7 +75,7 @@
 
 ## 7. 本リポジトリのフォルダ構成
 
-| フォルダ名 |  | 詳細 |
+| フォルダ名 | | 詳細 |
 | --- | --- | --- |
 | urban-structure-simulation-arcgis | InputDataGeneration | 都市構造シミュレーションのうち、インプットデータ生成機能 |
 |  | Output/Visualization | 都市構造シミュレーションのうち、3D可視化機能 |
@@ -84,8 +84,6 @@
 |  | DistZoneFacilityDataGeneration | ゾーン施設間平均距離生成機能のソースコード |
 |  | IndividualDataGeneration | 個人データ生成機能のソースコード |
 |  | TransPortationDataGeneration | 交通データ生成機能のソースコード |
-| images | | readmeで使用している画像を格納 |
-
 
 <!---
 | フォルダ名 |  |  |
