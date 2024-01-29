@@ -18,7 +18,7 @@
 
 ## 3. 利用手順<!-- (GitHub Pagesへのリンクを記載。文章はサンプルをベースに「システム」の部分のみ適切に書き換え)-->
 
-本システムの構築手順及び利用手順については[利用チュートリアル](https://r5-plateau-acn.github.io/SolarPotential/)を参照してください。<br>なお、本システムの使用にあたっては、宇都宮市の[サンプルデータ](sample)をご活用いただけます。
+本システムの構築手順及び利用手順については[利用チュートリアル](https://r5-plateau-acn.github.io/SolarPotential/)を参照してください。<br>なお、本システムの使用にあたっては、宇都宮市の[サンプルデータ](Releases)をご活用いただけます。
 
 ## 4. システム概要
 
@@ -46,48 +46,67 @@
 
 
 
-| 項目 | バージョン | 内容 |
-| --- | --- | --- |
-| [ArcGISPro](https://www.esri.com/ja-jp/home)  | 3.1以降 | 地理空間情報の編集・分析が可能な地理情報システム（GIS）。データ加工の効率化、可視化の速さを考慮して選定。3D都市モデルの加工、シミュレーション結果の可視化に活用。 |
-| [Python](https://www.python.jp/)  | 3.9以降 | 汎用プログラミング言語。シミュレータの構築やデータの処理の多くをpythonで統一して記述することにより効率化できるため選定。 |
-| [Pandas](https://pandas.pydata.org/)  | 1.4.3以降 | Python用のデータ分析ライブラリ。csv等をpandas.dataframe形式で扱い、操作することが可能。データ加工やシミュレーション構築に活用。 |
-| [Numpy](https://numpy.org/ja/)  | 1.21.5以降 | Pythonの数値計算ライブラリで、多次元配列オブジェクトとそれを操作するツールを提供。データ加工やシミュレーション構築に活用。 |
-| [Geopandas](https://geopandas.org/en/stable/index.html)  | 0.9.0 | 地理空間データを扱うためのPythonライブラリ。Pandasのデータフレームに地理情報機能を追加。データ加工やシミュレーション構築に活用 |
+| 種別 | 名称 | バージョン | 内容 |
+| --- | --- | --- | --- |
+| ソフトウェア | [ArcGISPro](https://www.esri.com/ja-jp/home)  | 3.1以降 | 地理空間情報の編集・分析が可能な地理情報システム（GIS）。データ加工の効率化、可視化の速さを考慮して選定。3D都市モデルの加工、シミュレーション結果の可視化に活用。 |
+|  | [Python](https://www.python.jp/)  | 3.9以降 | 汎用プログラミング言語。シミュレータの構築やデータの処理の多くをpythonで統一して記述することにより効率化できるため選定。 |
+| ライブラリ | [Pandas](https://pandas.pydata.org/)  | 1.4.3以降 | Python用のデータ分析ライブラリ。csv等をpandas.dataframe形式で扱い、操作することが可能。データ加工やシミュレーション構築に活用。 |
+|  | [Numpy](https://numpy.org/ja/)  | 1.21.5以降 | Pythonの数値計算ライブラリで、多次元配列オブジェクトとそれを操作するツールを提供。データ加工やシミュレーション構築に活用。 |
+|  | [Geopandas](https://geopandas.org/en/stable/index.html)  | 0.9.0 | 地理空間データを扱うためのPythonライブラリ。Pandasのデータフレームに地理情報機能を追加。データ加工やシミュレーション構築に活用 |
 
 ### システム構築やデータ作成において利用するソフトウェア・ライブラリ
 
-| 項目 | バージョン | 内容 |
-| --- | --- | --- |
-| [ArcGIS Data Interoperability for Pro](https://www.esri.com/ja-jp/home)  | 2.9以降 | ArcGIS Proのデータ変換エクステンション。 |
-| [R](https://www.r-project.org/)  | 4.2.2以降 | 統計解析向けのプログラミング言語。ロジットモデル等のパラメータの推定に長けているライブラリが存在するため選定。 |
+| 種別 | 名称 | バージョン | 内容 |
+| --- | --- | --- | --- |
+| ソフトウェア | [ArcGIS Data Interoperability for Pro](https://www.esri.com/ja-jp/home)  | 2.9以降 | ArcGIS Proのデータ変換エクステンション。 |
+|  | [R](https://www.r-project.org/)  | 4.2.2以降 | 統計解析向けのプログラミング言語。ロジットモデル等のパラメータの推定に長けているライブラリが存在するため選定。 |
 
 
 ## 6. 動作環境
 
-OS：Windows10
+| 項目 | 最小動作環境 | 推奨動作環境 |
+| --- | --- | --- |
+| OS | Windows10 | 同左 |
+| CPU | Intel Core i7 | Intel Core i7 以上 |
+| メモリ | 8.00 GB | 8.00 GB以上 |
+| ディスプレイ解像度 | 1024×768以上 | 同左 |
+| ネットワーク | 不要 | 同左 |
 
 
-## 7. 本リポジトリのフォルダ構成(※要更新)
+## 7. 本リポジトリのフォルダ構成
 
-```markdown
-├─ArcGIS_toolbox
-│    ├─aa
-│    └─bb
-├─exe_file
-│    ├─urban_structure_ simulation
-│    ├─zone_data
-│    ├─average_distance
-│    ├─individual_data
-│    └─traffic_data
-├─sample
-│    ├─sample_of_building_data_and_input_data_generation_function (Utsunomiya)
-│    ├─sample_of_simulation (Utsunomiya)
-│    └─data_layout
-├─images
-├─instruction_manual
-└─readme.md
-```
+| フォルダ名 | 詳細 |
+| --- | --- |
+| urban-structure-simulation-arcgis | 実装環境からexeファイルとインプットデータを除いたもの |
+| py | exeファイルのソースコード |
+| Releases | シミュレーションの実行ファイル、サンプルデータを管理 |
+| images | readmeで使用している画像を格納 |
+| readme.md |  |
 
+
+<!---
+| フォルダ名 |  |  |
+| --- | --- | --- |
+| urban-structure-simulation-arcgis |  |  |
+| py | ZoneDataGeneration |  |
+|  | DistZoneFacilityDataGeneration |  |
+|  | IndividualDataGeneration |  |
+|  | TransPortationDataGeneration |  |
+|  | Simulation |  |
+| images |  |  |
+| readme.md |  |  |
+| Releases | exe | ZoneDataGeneration.exe |
+|  |  | DistZoneFacilityDataGeneration.exe |
+|  |  | IndividualDataGeneration.exe |
+|  |  | TransPortationDataGeneration.exe |
+|  |  | Simulation.exe |
+|  | sample_data | 建築物データ生成機能 |
+|  |  | ZoneDataGeneration |
+|  |  | DistZoneFacilityDataGeneration |
+|  |  | IndividualDataGeneration |
+|  |  | TransPortationDataGeneration |
+|  |  | Simulation |
+--->
 
 ## 8. ライセンス
 
