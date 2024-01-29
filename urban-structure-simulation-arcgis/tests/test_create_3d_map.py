@@ -1,4 +1,3 @@
-import itertools
 import os
 
 import pytest
@@ -13,51 +12,6 @@ def test_get_year():
     assert create_3d_map.get_year(r"C:\path\to\A\Building_2022.txt") == ""
     # is not year.
     assert create_3d_map.get_year(r"C:\path\to\A\Building_202.csv") == ""
-
-
-def test_compare_usage():
-    residences = [
-        411,
-    ]
-    others = [
-        412,
-        413,
-        414,
-        415,
-        401,
-        402,
-        403,
-        404,
-        421,
-        422,
-        431,
-        441,
-        451,
-        452,
-        453,
-        454,
-        461,
-    ]
-    vacants = [None, -1]
-    for vacant in vacants:
-        for x in residences:
-            assert create_3d_map.compare_usage(vacant, x) == "空地→住宅"
-    for vacant in vacants:
-        for x in others:
-            assert create_3d_map.compare_usage(vacant, x) == "空地→住宅以外"
-    for vacant in vacants:
-        for x in [*residences, *others]:
-            assert create_3d_map.compare_usage(x, vacant) == "空地になる"
-    for x in residences:
-        for y in others:
-            assert create_3d_map.compare_usage(x, y) == "住宅→住宅以外"
-            assert create_3d_map.compare_usage(y, x) == "住宅以外→住宅"
-    for xs in itertools.combinations(others, 2):
-        assert create_3d_map.compare_usage(*xs) == "住宅以外→住宅以外"
-    for x in [*residences, *others]:
-        assert create_3d_map.compare_usage(x, x) == "変わらない"
-    for xs in itertools.combinations(residences, 2):
-        assert create_3d_map.compare_usage(*xs) == "変わらない"
 
 
 def test_comparetype_get_symbol():
@@ -104,6 +58,55 @@ def test_set_output_layer_name():
             "-obj-2020-sbj-2040.lyrx"
         ),
     )
+
+
+def test_compare_usage():
+    assert create_3d_map.compare_usage("変わらない") == "変わらない"
+    assert create_3d_map.compare_usage("空地→住宅") == "空地→住宅"
+    for x in [
+        "空地→共同住宅",
+        "空地→商業施設",
+        "空地→店舗等併用共同住宅",
+        "空地→店舗等併用住宅",
+    ]:
+        assert create_3d_map.compare_usage(x) == "空地→住宅以外"
+    for x in [
+        "共同住宅→空地",
+        "住宅→空地",
+        "商業施設→空地",
+        "店舗等併用共同住宅→空地",
+        "店舗等併用住宅→空地",
+    ]:
+        assert create_3d_map.compare_usage(x) == "空地になる"
+    for x in [
+        "住宅→共同住宅",
+        "住宅→商業施設",
+        "住宅→店舗等併用共同住宅",
+        "住宅→店舗等併用住宅",
+    ]:
+        assert create_3d_map.compare_usage(x) == "住宅→住宅以外"
+    for x in [
+        "共同住宅→住宅",
+        "商業施設→住宅",
+        "店舗等併用共同住宅→住宅",
+        "店舗等併用住宅→住宅",
+    ]:
+        assert create_3d_map.compare_usage(x) == "住宅以外→住宅"
+    for x in [
+        "共同住宅→商業施設",
+        "共同住宅→店舗等併用共同住宅",
+        "共同住宅→店舗等併用住宅",
+        "商業施設→共同住宅",
+        "商業施設→店舗等併用共同住宅",
+        "商業施設→店舗等併用住宅",
+        "店舗等併用共同住宅→共同住宅",
+        "店舗等併用共同住宅→商業施設",
+        "店舗等併用共同住宅→店舗等併用住宅",
+        "店舗等併用住宅→共同住宅",
+        "店舗等併用住宅→商業施設",
+        "店舗等併用住宅→店舗等併用共同住宅",
+    ]:
+        assert create_3d_map.compare_usage(x) == "住宅以外→住宅以外"
 
 
 @pytest.mark.parametrize(
