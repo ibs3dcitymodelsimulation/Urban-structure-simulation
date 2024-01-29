@@ -18,7 +18,7 @@
 
 ## 3. 利用手順<!-- (GitHub Pagesへのリンクを記載。文章はサンプルをベースに「システム」の部分のみ適切に書き換え)-->
 
-本システムの構築手順及び利用手順については[利用チュートリアル](https://r5-plateau-acn.github.io/SolarPotential/)を参照してください。<br>なお、本システムの使用にあたっては、宇都宮市の[サンプルデータ](Releases)をご活用いただけます。
+本システムの構築手順及び利用手順については[利用チュートリアル](https://r5-plateau-acn.github.io/SolarPotential/)を参照してください。<br>なお、本システムの使用にあたっては、宇都宮市のサンプルデータをご活用いただけます。
 
 ## 4. システム概要
 
@@ -75,13 +75,16 @@
 
 ## 7. 本リポジトリのフォルダ構成
 
-| フォルダ名 | 詳細 |
-| --- | --- |
-| urban-structure-simulation-arcgis | 実装環境からexeファイルとインプットデータを除いたもの |
-| py | exeファイルのソースコード |
-| Releases | シミュレーションの実行ファイル、サンプルデータを管理 |
-| images | readmeで使用している画像を格納 |
-| readme.md |  |
+| フォルダ名 |  | 詳細 |
+| --- | --- | --- |
+| urban-structure-simulation-arcgis | InputDataGeneration | 都市構造シミュレーションのうち、インプットデータ生成機能 |
+|  | Output/Visualization | 都市構造シミュレーションのうち、3D可視化機能 |
+|  | Simulation | 都市構造シミュレーション |
+| py | ZoneDataGeneration | ゾーンデータ生成機能のソースコード |
+|  | DistZoneFacilityDataGeneration | ゾーン施設間平均距離生成機能のソースコード |
+|  | IndividualDataGeneration | 個人データ生成機能のソースコード |
+|  | TransPortationDataGeneration | 交通データ生成機能のソースコード |
+| images | | readmeで使用している画像を格納 |
 
 
 <!---
