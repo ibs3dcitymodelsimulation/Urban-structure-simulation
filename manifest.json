@@ -1,0 +1,415 @@
+{
+  "source_base_path": "C:/devel/Urban-structure-simulation/markdown",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/devMan.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/devMan.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "manual/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "manual/toc.html"
+        },
+        ".json": {
+          "relative_path": "manual/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/userMan.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/userMan.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/index.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/index.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/logo.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig15.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig15.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig19.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig19.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig20.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig20.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig21.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig21.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig22.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig22.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig23.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig23.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig24.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig24.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig25.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig25.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig3.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig3.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig4.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig4.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig5.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig5.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig6.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig6.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/fig8.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/fig8.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image1.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image1.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image10.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image10.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image15.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image15.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image16.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image16.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image17.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image17.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image18.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image18.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image19.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image19.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image20.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image20.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image22.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image22.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image23.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image23.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image24.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image24.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image37.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image37.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image38.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image38.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image39.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image39.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image41.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image41.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image43.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image43.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image44.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image44.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/image45.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/image45.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/userMan/usage-flow.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/userMan/usage-flow.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
