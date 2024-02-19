@@ -22,12 +22,33 @@ def calc_los_rail(indir, outdir, src_proj, dst_proj, df_zn):
     path_rail_fare_dist = indir + '/Rail_Fare_Dist.csv' #運賃テーブル（対距離）
     path_rail_fare_sec = indir + '/Rail_Fare_Table.csv' #運賃テーブル（特定区間）
 
-    print(datetime.datetime.now().time(),'データ読込開始')
-    #駅コード読込
     if os.path.exists(path_station) != True:
         print('駅コード:' + path_station + 'がありません')
-        os.system('PAUSE')
-        sys.exit()
+        print('鉄道LOS作成をスキップします')
+        df_los = los_dmy(df_zn)
+        return df_los
+    if os.path.exists(path_rail_nw) != True:
+        print('鉄道NW:' + path_rail_nw + 'がありません')
+        print('鉄道LOS作成をスキップします')
+        df_los = los_dmy(df_zn)
+        return df_los
+    if os.path.exists(path_rail_fare_dist) != True:
+        print('鉄道運賃テーブル（対距離）:' + path_rail_fare_dist + 'がありません')
+        print('鉄道LOS作成をスキップします')
+        df_los = los_dmy(df_zn)
+        return df_los
+    if os.path.exists(path_station) != True:
+        print('鉄道運賃テーブル（特定区間）:' + path_station + 'がありません')
+        print('鉄道LOS作成をスキップします')
+        df_los = los_dmy(df_zn)
+        return df_los
+
+    print(datetime.datetime.now().time(),'データ読込開始')
+    #駅コード読込
+    #if os.path.exists(path_station) != True:
+    #    print('駅コード:' + path_station + 'がありません')
+    #    os.system('PAUSE')
+    #    sys.exit()
     print(datetime.datetime.now().time(),'駅コード読込：' + path_station)
     dtype_station = {0: str, 1: str, 2: str, 3: str, 4: float, 5: float, 6: str, 7: int}
     df_station = pd.read_csv(path_station, encoding='shift-jis',dtype=dtype_station) 
@@ -36,10 +57,10 @@ def calc_los_rail(indir, outdir, src_proj, dst_proj, df_zn):
 
 
     #鉄道NWデータ読込
-    if os.path.exists(path_rail_nw) != True:
-        print('鉄道NW:' + path_rail_nw + 'がありません')
-        os.system('PAUSE')
-        sys.exit()
+    #if os.path.exists(path_rail_nw) != True:
+    #    print('鉄道NW:' + path_rail_nw + 'がありません')
+    #    os.system('PAUSE')
+    #    sys.exit()
     print(datetime.datetime.now().time(),'鉄道NW読込：' + path_rail_nw)
     dtype_rail_nw = {0: str, 1: str, 2: str, 3: int, 4: int, 5: float, 6: float, 7: float, 8: float, 9: float, 10: float}
     df_rail_nw_tmp = pd.read_csv(path_rail_nw, encoding='shift-jis',dtype=dtype_rail_nw) 
@@ -53,20 +74,20 @@ def calc_los_rail(indir, outdir, src_proj, dst_proj, df_zn):
 
 
     #鉄道運賃テーブル（対距離）の読込
-    if os.path.exists(path_rail_fare_dist) != True:
-        print('鉄道運賃テーブル（対距離）:' + path_rail_fare_dist + 'がありません')
-        os.system('PAUSE')
-        sys.exit()
+    #if os.path.exists(path_rail_fare_dist) != True:
+    #    print('鉄道運賃テーブル（対距離）:' + path_rail_fare_dist + 'がありません')
+    #    os.system('PAUSE')
+    #    sys.exit()
     print(datetime.datetime.now().time(),'鉄道運賃テーブル（対距離）読込：' + path_rail_fare_dist)
     dtype_rail_fare_dist = {0: str, 1: int, 2: int, 3: float, 4: str}
     df_rail_fare_dist = pd.read_csv(path_rail_fare_dist, encoding='shift-jis',dtype=dtype_rail_fare_dist) 
 
 
     #鉄道運賃テーブル（特定区間）の読込
-    if os.path.exists(path_station) != True:
-        print('鉄道運賃テーブル（特定区間）:' + path_station + 'がありません')
-        os.system('PAUSE')
-        sys.exit()
+    #if os.path.exists(path_station) != True:
+    #    print('鉄道運賃テーブル（特定区間）:' + path_station + 'がありません')
+    #    os.system('PAUSE')
+    #    sys.exit()
     print(datetime.datetime.now().time(),'鉄道運賃テーブル（特定区間）読込：' + path_station)
     dtype_rail_fare_sec = {0: str, 1: str, 2: float, 3: str, 4: str}
     df_rail_fare_sec = pd.read_csv(path_rail_fare_sec, encoding='shift-jis',dtype=dtype_rail_fare_sec) 
@@ -610,4 +631,23 @@ def calc_los_rail(indir, outdir, src_proj, dst_proj, df_zn):
         df_los = pd.concat([df_los, df_los_zn], axis=0, ignore_index=True)
 
     print(datetime.datetime.now().time(),'鉄道LOS計算終了')
+    return df_los
+
+
+def los_dmy(df_zn):
+    df_los = pd.DataFrame(columns=['zone_code_o', 'zone_code_d', 'Travel_Time_Rail', 'Waiting_Time_Rail', 'Access_Time_Rail', 'Egress_Time_Rail', 'Fare_Rail'])
+    lst_jz = df_zn.iloc[:, 0]
+    
+    for iz in range(len(df_zn)):
+        lst_los = []
+        for jz in range(len(df_zn)):
+            if iz == jz:
+                lst_los.append([0,0,0,0,0,0,0])
+            else:
+                lst_los.append([0,0,9999.0,9999.0,9999.0,9999.0,9999.0])
+
+        df_los_zn = pd.DataFrame(lst_los, columns=['zone_code_o', 'zone_code_d', 'Travel_Time_Rail', 'Waiting_Time_Rail', 'Access_Time_Rail', 'Egress_Time_Rail', 'Fare_Rail'])
+        df_los_zn.iloc[:, 0] = lst_jz[iz]
+        df_los_zn.iloc[:, 1] = lst_jz
+        df_los = pd.concat([df_los, df_los_zn], axis=0, ignore_index=True)
     return df_los

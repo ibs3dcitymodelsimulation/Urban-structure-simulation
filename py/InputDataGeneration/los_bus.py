@@ -29,12 +29,29 @@ def calc_los_bus(indir, outdir, src_proj, dst_proj, df_zn):
     path_shp_zn = indir + '/Zone_Polygon.shp' #ゾーンのshp
 
 
-    print(datetime.datetime.now().time(),'データ読込開始')
-    #バス停コード読込
     if os.path.exists(path_bus_stop) != True:
         print('バス停コード:' + path_bus_stop + 'がありません')
-        os.system('PAUSE')
-        sys.exit()
+        print('バスLOS作成をスキップします')
+        df_los = los_dmy(df_zn)
+        return df_los
+    if os.path.exists(path_bus_nw) != True:
+        print('バスNW:' + path_bus_nw + 'がありません')
+        print('バスLOS作成をスキップします')
+        df_los = los_dmy(df_zn)
+        return df_los
+    if os.path.exists(path_bus_fare) != True:
+        print('バス運賃テーブル:' + path_bus_fare + 'がありません')
+        print('バスLOS作成をスキップします')
+        df_los = los_dmy(df_zn)
+        return df_los
+
+
+    print(datetime.datetime.now().time(),'データ読込開始')
+    #バス停コード読込
+    #if os.path.exists(path_bus_stop) != True:
+    #    print('バス停コード:' + path_bus_stop + 'がありません')
+    #    os.system('PAUSE')
+    #    sys.exit()
     print(datetime.datetime.now().time(),'バス停コード読込：' + path_bus_stop)
     dtype_bus_stop = {0: str, 1: str, 2: float, 3: float, 4: str}
     df_bus_stop = pd.read_csv(path_bus_stop, encoding='shift-jis',dtype=dtype_bus_stop) 
@@ -45,10 +62,10 @@ def calc_los_bus(indir, outdir, src_proj, dst_proj, df_zn):
 
 
     #バスNWデータ読込
-    if os.path.exists(path_bus_nw) != True:
-        print('バスNW:' + path_bus_nw + 'がありません')
-        os.system('PAUSE')
-        sys.exit()
+    #if os.path.exists(path_bus_nw) != True:
+    #    print('バスNW:' + path_bus_nw + 'がありません')
+    #    os.system('PAUSE')
+    #    sys.exit()
     print(datetime.datetime.now().time(),'バスNW読込：' + path_bus_nw)
     dtype_bus_nw = {0: str, 1: str, 2: str, 3: str, 4: str, 5: float, 6: float}
     df_bus_nw_tmp = pd.read_csv(path_bus_nw, encoding='shift-jis',dtype=dtype_bus_nw) 
@@ -61,10 +78,10 @@ def calc_los_bus(indir, outdir, src_proj, dst_proj, df_zn):
 
 
     #バス運賃テーブルの読込
-    if os.path.exists(path_bus_fare) != True:
-        print('バス運賃テーブル:' + path_bus_fare + 'がありません')
-        os.system('PAUSE')
-        sys.exit()
+    #if os.path.exists(path_bus_fare) != True:
+    #    print('バス運賃テーブル:' + path_bus_fare + 'がありません')
+    #    os.system('PAUSE')
+    #    sys.exit()
     print(datetime.datetime.now().time(),'バス運賃テーブル読込：' + path_bus_fare)
     dtype_bus_fare = {0: str, 1: str, 2: str, 3: str, 4: float}
     df_bus_fare_tmp = pd.read_csv(path_bus_fare, encoding='shift-jis',dtype=dtype_bus_fare) 
@@ -448,4 +465,20 @@ def calc_los_bus(indir, outdir, src_proj, dst_proj, df_zn):
         df_los = pd.concat([df_los, df_los_zn], axis=0, ignore_index=True)
 
     print(datetime.datetime.now().time(),'バスLOS計算終了')
+    return df_los
+
+
+def los_dmy(df_zn):
+    df_los = pd.DataFrame(columns=['Travel_Time_Bus', 'Waiting_Time_Bus', 'Access_Time_Bus', 'Egress_Time_Bus', 'Fare_Bus'])
+    
+    for iz in range(0, len(df_zn)):
+        lst_los = []
+        for jz in range(0, len(df_zn)):
+            if iz == jz:
+                lst_los.append([0.0,0.0,0.0,0.0,0.0])
+            else:
+                lst_los.append([9999.0,9999.0,9999.0,9999.0,9999.0])
+
+        df_los_zn = pd.DataFrame(lst_los, columns=['Travel_Time_Bus', 'Waiting_Time_Bus', 'Access_Time_Bus', 'Egress_Time_Bus', 'Fare_Bus'])
+        df_los = pd.concat([df_los, df_los_zn], axis=0, ignore_index=True)
     return df_los

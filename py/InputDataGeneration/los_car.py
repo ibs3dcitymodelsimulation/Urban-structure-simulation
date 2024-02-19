@@ -20,12 +20,25 @@ def calc_los_car(indir, outdir, src_proj, dst_proj, df_zn):
     path_shp_link = indir + '/Road_NW.shp' #道路NWリンクのshp
     path_shp_node = indir + '/Road_Node.shp' #道路NWノードのshp
 
-    print(datetime.datetime.now().time(),'データ読込開始')
-    #道路NWリンクshp読込
+
     if os.path.exists(path_shp_link) != True:
         print('道路NWリンクshp:' + path_shp_link + 'がありません')
-        os.system('PAUSE')
-        sys.exit()
+        print('自動車LOS作成をスキップします')
+        df_los = los_dmy(df_zn)
+        return df_los
+    if os.path.exists(path_shp_node) != True:
+        print('道路NWノードshp:' + path_shp_node + 'がありません')
+        print('自動車LOS作成をスキップします')
+        df_los = los_dmy(df_zn)
+        return df_los
+
+
+    print(datetime.datetime.now().time(),'データ読込開始')
+    #道路NWリンクshp読込
+    #if os.path.exists(path_shp_link) != True:
+    #    print('道路NWリンクshp:' + path_shp_link + 'がありません')
+    #    os.system('PAUSE')
+    #    sys.exit()
     print(datetime.datetime.now().time(),'道路NWリンク読込：' + path_shp_link)
     gdf = gpd.read_file(path_shp_link)
     #リンクデータをデータフレームに変換
@@ -40,10 +53,10 @@ def calc_los_car(indir, outdir, src_proj, dst_proj, df_zn):
 
 
     #道路NWノードshp読込
-    if os.path.exists(path_shp_node) != True:
-        print('道路NWノードshp:' + path_shp_node + 'がありません')
-        os.system('PAUSE')
-        sys.exit()
+    #if os.path.exists(path_shp_node) != True:
+    #    print('道路NWノードshp:' + path_shp_node + 'がありません')
+    #    os.system('PAUSE')
+    #    sys.exit()
     print(datetime.datetime.now().time(),'道路NWノード読込：' + path_shp_node)
     gdf = gpd.read_file(path_shp_node)
     #ノードデータをデータフレームに変換
@@ -231,4 +244,20 @@ def calc_los_car(indir, outdir, src_proj, dst_proj, df_zn):
 
     df_los = df_los.replace(math.inf, 9999.0)
     print(datetime.datetime.now().time(),'自動車LOS計算終了')
+    return df_los
+
+
+def los_dmy(df_zn):
+    df_los = pd.DataFrame(columns=['Travel_Time_Car'])
+    
+    for iz in range(len(df_zn)):
+        lst_los = []
+        for jz in range(len(df_zn)):
+            if iz == jz:
+                lst_los.append([0,0])
+            else:
+                lst_los.append([9999.0])
+
+        df_los_zn = pd.DataFrame(lst_los, columns=['Travel_Time_Car'])
+        df_los = pd.concat([df_los, df_los_zn], axis=0, ignore_index=True)
     return df_los
