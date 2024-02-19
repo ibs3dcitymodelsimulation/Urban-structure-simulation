@@ -173,28 +173,28 @@ SHP形式で以下の情報を付与したデータである。
 ここでは例として、国勢調査小地域ポリゴンをベースにゾーンポリゴンデータを作成する手順を示す。
 
 まず、[e-stat/統計地理情報システム/境界データダウンロード](https://www.e-stat.go.jp/gis/statmap-search?page=1&type=2&aggregateUnitForBoundary=A&toukeiCode=00200521&toukeiYear=2015&serveyId=A002005212015&coordsys=1&format=shape&datum=2000)より、シミュレーションの対象としたい範囲を含むデータをダウンロードする。<br>
-<img src="../resources/devMan/01image11.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image11.png">
 
 次に、ダウンロードしたzipファイルを解凍し、GISソフトで開き、空間座標系、フィールドの調整を行う。例として、QGISを使用する場合の手順を示す。なお、QGISの各種操作に関しては、[QGISのDocumantation](https://docs.qgis.org/3.4/ja/docs/index.html)も参考にされたい。まず、QGISを開いて、shpファイルをレイヤに追加する。追加したレイヤは、編集モードに切り替える。<br>
-<img src="../resources/devMan/01image12.png" style="height:3.69729in"/><br>
+<img src="../resources/devMan/01image12.png"><br>
 
 Zone_code列を作成する。Zone_code列にはゾーンポリゴンごとにユニークな文字列を入れる必要がある。たとえば、str型のZone_code列を作成し、式に`to_string(@row_number)`を入力することで作成できる。<br>
-<img src="../resources/devMan/01image13.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image13.png">
 
 不要なフィールドを削除する。ここでは、Zone_code以外のフィールドを削除する。フィールドを削除するには、レイヤを編集モードに切り替えたのち、属性テーブルを開き、フィールドの削除を選択、削除するフィールドをすべて選択してOKを押す。<br>
-<img src="../resources/devMan/01image14.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image14.png">
 
 ポリゴンの重心を計算する。プロセシングツールボックス/ベクタジオメトリ/重心を選択し、実行する。重心レイヤが作成される。<br>
-<img src="../resources/devMan/01image15.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image15.png">
 
 重心レイヤを用いて、Lat列、Lon列を作成する。まず、重心レイヤを編集モードに切り替える。フィール計算機を開き、出力する属性（フィールド）の名前、フィールド型、式を設定してOKボタンを押す。フィールド型は、いずれもreal型を指定する。式は、Latは `\$y`、Lonは`\$x`を入力する。最後に、重心レイヤの編集モードを終了する。<br>
-<img src="../resources/devMan/01image16.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image16.png">
 
 小地域ポリゴンに、重心の緯度経度を付与する。小地域ポリゴンのレイヤを右クリックし、プロパティを開き、テーブル結合を選択する。結合するレイヤは「重心」、結合基準の属性とターゲット属性はいずれも「Zone_code」を選択する。属性名の接頭辞にチェックを入れ、接頭辞を空白にし、OKを押す。<br>
-<img src="../resources/devMan/01image17.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image17.png">
 
 shpファイル形式で出力する。小地域ポリゴンのレイヤを右クリックし、エクスポート、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名は「Zone_Polygon.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。<br>
-<img src="../resources/devMan/01image18.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image18.png"/>
 
 以上の手順で作成したデータを、以下のフォルダーに配置する。
 
@@ -239,21 +239,21 @@ CSV形式で以下の情報を付与したデータである。
 ダウンロードしたzipファイルを解凍し、csv形式に変換する。ここでは、QGISを使用した手順を示す。
 
 まず、QGISを開いて、各shpファイルをレイヤに追加する。<br>
-<img src="../resources/devMan/01image19.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image19.png">
 
 レイヤを選択し、編集モードに変換、緯度経度を表すLat列とLon列を作成する。この手順はゾーンポリゴンデータ作成と同様である。2列を作成したら、編集モードを終了する。この操作を、各レイヤそれぞれについて実施する。<br>
-<img src="../resources/devMan/01image20.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image20.png">
 
 各レイヤを、csv形式で出力する。レイヤを右クリックしてエクスポートを選択、ファイル名は任意にせて地してOKを押す。<br>
-<img src="../resources/devMan/01image21.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image21.png">
 
 出力したcsvファイルを、Excelで開いて編集する。適宜、国土数値情報ダウンロードにて公開されている各データの標準製品仕様を確認しながら作業を進める。
 
 まず、図書館のポイントデータを作成する。公共施設（ポイント）データをcsv出力したものをExcelで開き、フィルターを用いて「P02_003」列が「3003」である列に絞る。<br>
-<img src="../resources/devMan/01image22.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image22.png">
 
 Lat列とLon列を選択し、別のシートにコピーして貼り付ける。name列、Facility_type列を作成する。name列には自由に施設名称を追加するこができる。Facility_type列には、すべて「1」を入力する。<br>
-<img src="../resources/devMan/01image23.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image23.png">
 
 同様の手順で、病院、診療所、小学校、中学校、幼稚園こども園についても作成する。
 
@@ -316,28 +316,28 @@ OpenStreetMapのデータを利用する場合の整備方法を示す。
 #### 2.6.3.1. OpenStreetMapのデータからシミュレーション対象範囲を切り出す
 
 まず、[OpenStreetMap Data Extractsのうち、範囲をAsia-Japanと絞ったあとのデータ](https://download.geofabrik.de/asia/japan.html)から、シミュレーション対象としたい範囲を含むデータを「.osm.pbf」形式でダウンロードする。<br>
-<img src="../resources/devMan/02image24.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image24.png">
 
 ダウンロードしたファイルをGISソフトで開き、[ゾーンポリゴンデータ](#24-ゾーンポリゴンデータ)にて作成したSHP形式のデータを利用することで、シミュレーション対象エリアを切り出す操作を行う。例として、QGISを使用する場合の手順を示す。なお、QGISの各種操作に関しては、QGISのDocumantation(https://docs.qgis.org/3.4/ja/docs/index.html）も参考にされたい。
 
 まず、QGISを開いて、「.osm.pdf」ファイルをレイヤに追加する。追加したとき、追加するアイテムを選択する必要があるため、linesを選択し、レイヤを追加を押す。<br>
-<img src="../resources/devMan/02image26.png" style="height:3.69729in" />
+<img src="../resources/devMan/02image26.png"/>
 
 [ゾーンポリゴンデータ](#24-ゾーンポリゴンデータ)にて作成した、「Zone_Polygon.shp」をレイヤに追加し、図示したのち、「Zone_Polygon.shp」より広い範囲の地物を選択する。<br>
-<img src="../resources/devMan/02image27.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image27.png">
 
 linesレイヤを右クリックし、エクスポート、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名はなんでも良いが、ここでは「lines.shp」とし、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。<br>
-<img src="../resources/devMan/02image28.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image28.png">
 
 続いて、[ゾーンポリゴンデータ](#24-ゾーンポリゴンデータ)にて作成した形にデータを切り抜くため、ベクタ（O）ー空間演算ツール（G）ー切り抜く（Clip）と選択し、入力レイヤを「lines.shp」、オーバーレイレイヤを「Zone_Polygon.shp」、出力レイヤを「Road_NW.shp」として、実行を押す。<br>
-<img src="../resources/devMan/02image30.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image30.png">
 
 以上の操作から、対象エリアに絞ったNWデータを切り出すことができた。
 
 #### 2.6.3.2. Road_Nodeの作成
 
 次に、NWデータからポイントデータを生成する。「Road_NW.shp」のレイヤに対してフィールド計算機から、「xat(0)」と入力することで、リンクの始点経度が計算される。この時、フィールド型は小数点付き数値（real）とし、精度は7、ここでの名称は、「LonFrom」とする。<br>
-<img src="../resources/devMan/02image31.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image31.png">
 
 同様に、終点経度は「xat(-1)」と入力し、名称は「LonTo」、始点緯度は「yat(0)」と入力し、名称は「LatFrom」、終点緯度は「yat(-1)」と入力し、名称は「LatTo」とする。
 
@@ -346,14 +346,14 @@ linesレイヤを右クリックし、エクスポート、新規ファイルに
 #### 2.6.3.3. Road_Nodeの属性フィールドの調整
 
 「Road_Node.csv」をEXCELから開き、「LonFrom」、「LonTo」、「LatFrom」、「LatTo」の列以外は削除する。新たに「Lat」列を作成し、「LatFrom」、「LatTo」を縦に並べる。同様に、新たに「Lon」列を作成し、「LonFrom」、「LonTo」を縦に並べる。データを切り貼りする際、「Ctrl+Shift+↓」で一番下のデータまで選択することが可能である。その後、「Lat」「Lon」の2列全体を選択した後、データタブのデータツールにおける重複の削除を選択し、現在選択されている範囲を並び替えるにチェック、重複の削除を押し、OKを押す。<br>
-<img src="../resources/devMan/02image32.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image32.png">
 
 続いて、「NodeID」列を追加し、1から連番で数字を割り振る。「NextMesh」「NextNodeID」列も追加し、順番を「NodeID」「Lat」「Lon」「NextMesh」「NextNodeID」に並び替え、保存する。<br>
-<img src="../resources/devMan/02image33.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image33.png">
 
 QGISに戻り、レイヤーレイヤを追加―CSVテキストレイヤを追加と選択し、ファイル名は「Road_Node.csv」を選択、ジオメトリ定義をポイント座標X値：Lon、Y値：Lat、座標参照系はEPSG:6697、文字コードはShift_JISを選択し、追加を押すと、ポイントデータが描画される。<br>
-<img src="../resources/devMan/02image34.png" style="height:3.69729in"/>
-<img src="../resources/devMan/02image35.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image34.png">
+<img src="../resources/devMan/02image35.png">
 
 上記ポイントデータを、shpファイル形式で出力する。Road_Nodeのレイヤを右クリックし、エクスポート、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名は「Road_Node.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。
 
@@ -362,7 +362,7 @@ QGISに戻り、レイヤーレイヤを追加―CSVテキストレイヤを追�
 **Lengthの設定**
 
 「Road_NW.shp」レイヤに対して、フィールド計算機を開き、フィールド名を「Length」、フィールド型を小数点付き数値（real）とし、ジオメトリの「\$length」を選択、または、式に「\$length」と入力し、OKを押す。<br>
-<img src="../resources/devMan/02image36.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image36.png">
 
 **RoadKindの設定**
 
@@ -437,13 +437,13 @@ END
 **NodeIDFrom, NodeIDToの設定**
 
 「Road_NW.shp」レイヤをcsvファイルとしてエクスポートし、「Road_NW.csv」に対して、新たなページに「Road_Node.csv」も貼り付ける。「Road_Node」シートにおいて、一番左に、Lat列とLon列の文字列を結合した列を追加する（例えば、「=C2&D2」とする）。<br>
-<img src="../resources/devMan/02image37.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image37.png">
 
 「Road_NW」シートにおいて、同様にFromに関してLat列とLon列の文字列を結合した列（例えば、FromLatLon）、Toに関してLat列とLon列の文字列を結合した列（例えば、ToLatLon）を用意する。「NodeIDFrom」「NodeIDTo」列を追加し、それぞれの列に対してVLOOKUP関数を用いて、「Road_Node」シートのNodeIDを対応付ける（例えば、「=VLOOKUP(S2,Road_Node!\$A:\$B,2,FALSE)」とする）。<br>
-<img src="../resources/devMan/02image38.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image38.png">
 
 作成した「Road_NW.csv」を再度QGISにインポートし、「Road_NW.shp」を右クリックープロパティーテーブル結合―「+」ボタンと進み、結合レイヤを「Road_NW.csv」、結合基準の属性を「LinkID」、ターゲット属性を「osm_id」とし、「フィールド名の接頭辞」にチェックを入れ、接頭辞に指定されているファイル名を削除する。設定が完了したら、OKを押す。<br>
-<img src="../resources/devMan/02image39.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image39.png">
 
 **LinkIDの設定**
 
@@ -453,7 +453,7 @@ osm_idの列名をLinkIDに改名する。
 
 `LinkID、NodeIDFrom、NodeIDTo、Length、Passage（新たに作成）、DirectRag（新たに作成）、RoadKind、Speed（新たに作成）、Driveway（新たに作成）、Mainroad（新たに作成）、Separation、Width`
 
-<img src="../resources/devMan/02image40.png" style="height:3.69729in"/>
+<img src="../resources/devMan/02image40.png">
 
 上記NWデータを、shpファイル形式で出力する。Road_NWのレイヤを右クリックし、エクスポート、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名は「Road_NW.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。
 
@@ -504,7 +504,7 @@ CSV形式で以下の情報を付与したデータである。
 
 ※「＊」が付いている項目は空欄でもプログラム実行可能
 
-<img src="../resources/devMan/01image37.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image37.png"/>
 
 最後に、以上の手順で作成したデータを「Rail_Station.csv」として保存し、以下のフォルダーに配置する。
 
@@ -585,13 +585,13 @@ CSV形式でNWのリンク情報、運賃（距離帯形式）、運賃（テー
 リンクの種類に関しては、幹線リンク、駅ダミーリンク、乗換リンク（自路線乗換リンク、他路線乗換リンク）が存在する。幹線リンクと駅ダミーリンクは下図のようなイメージである。
 
 ここで駅ダミーリンクはホームを想定しているが、基本的には駅ノードと1対1対応するように作成し問題ない。乗換時間を詳細に加味したい場合には、駅ダミーを複数作成し、駅ダミー間に後述する乗換リンクを作成し所要時間を設定することで、乗換時間を詳細に加味することができる。<br>
-<img src="../resources/devMan/01image38.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image38.png"/>
 
 幹線リンク、駅ダミーリンクの作成例は下図のとおりである。幹線リンクには駅間の所要時間及び運行本数（任意）等を入力する。駅ダミーリンクには、駅から乗車場所（ホーム）までの移動時間を所要時間として入力する。<br>
-<img src="../resources/devMan/01image39.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image39.png"/>
 
 乗換リンク（自路線乗換リンク、他路線乗換リンク）の作成例は下図のとおりである。乗換リンクには、乗換に要する移動時間を所要時間として入力する。<br>
-<img src="../resources/devMan/01image40.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image40.png"/>
 
 所要時間や運行本数は、鉄道事業者のホームページ等の時刻表情報を元に作成する。例えば、JR東日本では以下のように時刻表が掲載されているため、駅間の所要時間と運行本数を入力する。
 
@@ -599,7 +599,7 @@ https://www.jreast-timetable.jp/2402/timetable/tt0248/0248050.html#time_16
 
 https://www.jreast-timetable.jp/2402/train/045/047621.html
 
-<img src="../resources/devMan/01image41.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image41.png"/>
 
 鉄道NWデータ（運賃（距離帯形式））、鉄道NWデータ（運賃（テーブル形式））については、鉄道事業者情報等をもとに、Excel等の表計算ソフトウェア上で入力し作成する。
 
@@ -675,7 +675,7 @@ GTFSのデータを利用する場合の整備方法を示す。
 GTFSは各データを整備している自治体や事業者のホームページで公表されているため、自治体や事業者のホームページにアクセスし、ダウンロードする。
 
 例えば、仙台市営バスは仙台市の以下のホームページ上で公開されており、[仙台市営バス情報](https://www.city.sendai.jp/joho-kikaku/shise/security/kokai/opendata_example.html)をクリックすることでGTFSデータがダウンロードできる。<br>
-<img src="../resources/devMan/01image42.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image42.png"/>
 
 バス停位置データは、GTFSの以下の各ファイルの各項目を、Excel等のCSV形式を扱えるソフトウェアを用いて切り出して作成する。
 
@@ -690,7 +690,7 @@ GTFSは各データを整備している自治体や事業者のホームペー�
 | stop_name | 停留所名       | stops.txt      | stop_name  |                    |
 
 なお、GTFSはTXT形式でデータが整備されているが、カンマ区切りのCSVとしてファイルを開くことが可能である。例えば、ExcelではTXT形式のままファイルを開こうとすると、以下のようなダイアログが表示されるが、「カンマやタブなどの区切り文字によってフィールドごとに区切られたデータ」を選択し、区切り文字に「カンマ」を指定することで、ファイルを開くことができる。<br>
-<img src="../resources/devMan/01image43.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image43.png"/>
 
 最後に、以上の手順で作成したデータを「Bus_Stop.csv」として保存し、以下のフォルダーに配置する。
 
@@ -767,10 +767,10 @@ GTFSデータのダウンロードは[バス停位置データ](#29-バス停位
 バスNWデータ（リンク情報）を作成する際には、GTFSデータのstop_times.txtのデータを基に作成することになるが、stop_times.txtはダイヤデータであり各径路（route_id）の全てのダイヤ（trip_id）の情報が記録されているため（下図参照）、バスNWデータ（リンク情報）とする際には、各径路の代表的なダイヤ（trip_id）を1つだけ抜き出す。代表的なダイヤは、最も運行本数が多い時間帯や朝ピーク時に設定するなど、作成者の任意の方法で設定してかまわない。
 
 所要時間は、停留所間のarrival_timeの差分で算出する。また、運行本数はroute_id毎のtrip_idの数をカウントすることで作成する。<br>
-<img src="../resources/devMan/01image44.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image44.png"/>
 
 なお、stop_times.txtにはroute_idの情報が付与されておらず、trips.txt（下図参照）にtrip_idとroute_idの対応が整理されているため、参照して付与する。<br>
-<img src="../resources/devMan/01image45.png" style="height:3.69729in" />
+<img src="../resources/devMan/01image45.png"/>
 
 最後に、以上の手順で作成したデータを「Bus_NW.csv」、「Bus_Fare.csv」として保存し、以下のフォルダーに配置する。
 
@@ -845,10 +845,10 @@ e-Statで公表されている[国勢調査 令和２年国勢調査 人口等�
 ### 2.13.3. データ整備方法
 
 [e-statの当該集計表のデータベース](https://www.e-stat.go.jp/dbview?sid=0003445216)にアクセスする。「表示項目選択」にて、フィルターを設定する。「配偶関係」は「総数」のみを選択する。「年齢」を、0～4歳、5～9歳、・・・、80～84歳、（再掲）85歳以上を選択する。「世帯の種類・世帯の家族類型・施設等の世帯の種類」は「総数」「夫婦のみの世帯」「夫婦と子供から成る世帯」「男親と子供から成る世帯」「女親と子供から成る世帯」を選択する。「全国～人口50万以上の市」では、シミュレーション対象とする市町村を選択する。<br>
-<img src="../resources/devMan/01image46.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image46.png">
 
 「確定」→「ダウンロード」を押し、ファイル形式は「CSV形式(列指向形式・Shift-JIS)」を選択、ダウンロードを行う。<br>
-<img src="../resources/devMan/01image47.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image47.png">
 
 ダウンロードしたcsvファイルをExcelで開き、加工する。
 
@@ -861,17 +861,17 @@ e-Statで公表されている[国勢調査 令和２年国勢調査 人口等�
 人数を表す「value」列は、列名を「pop」に変更する。「-」は「0」で置換する。
 
 age, gender, family, pop以外の列を削除する。<br>
-<img src="../resources/devMan/01image48.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image48.png">
 
 その他の世帯の人数を求める。まず、age, gender, family, popの4列を選択し、ピボットテーブルを作成、ageとgenderを行に、popを値に、familyをフィルターに設定する。familyは、合計を表す「0」を選択する。<br>
-<img src="../resources/devMan/01image49.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image49.png">
 
 同様に、familyのフィルターを、合計を表す「0」以外を選択したものを、隣に作成する。<br>
-<img src="../resources/devMan/01image50.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image50.png">
 
 二つのピボットテーブルで集計された値の差分を計算する。これが、その他の世帯の性別年齢別人口となる。familyを「5」とし、ピボットテーブルで参照していた範囲の最下部に、コピーして貼り付ける。<br>
-<img src="../resources/devMan/01image51.png" style="height:3.69729in"/><br>
-<img src="../resources/devMan/01image52.png" style="height:3.69729in"/>
+<img src="../resources/devMan/01image51.png"><br>
+<img src="../resources/devMan/01image52.png">
 
 最後に、family列で「0」の行を削除し、シートを「Population_GenderAgeFamily.csv」として保存、以下のフォルダーに配置する。
 
