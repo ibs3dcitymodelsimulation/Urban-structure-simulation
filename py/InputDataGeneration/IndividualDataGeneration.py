@@ -10,6 +10,10 @@ from utilities.get_marginal import get_marginal
 from utilities.rounding import rounding
 from utilities.custom_sample import custom_sample_with_dummy_multi
 
+# ZonePopulationを生成
+import PopulationZoneGeneration as pzg
+pzg.calc_ZoneApportionment()
+
 warnings.simplefilter(action='ignore', category=FutureWarning)
 # hyperparameters
 n_pools = 1
