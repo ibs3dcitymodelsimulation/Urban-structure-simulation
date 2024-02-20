@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>3. 本システムの概要 </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="3. 本システムの概要 ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../resources/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="3-本システムの概要">3. 本システムの概要</h1>
+
+<h2 id="31-都市構造シミュレーションの概要">3.1. 都市構造シミュレーションの概要</h2>
+<p>人々の活動がますます多様化する昨今、人々のウェルビーイング向上と持続可能な都市経営を実現するため、市民をはじめとする多様なステークホルダーがまちづくりの将来ビジョンを共有し、共感を得ながらビジョンを実現していくプランニングプロセスの必要性が高まっている。</p>
+<p>都市構造シミュレーションは、3D都市モデルを活用し、立地適正化計画等のまちづくり施策が都市構造に与える影響をわかりやすく可視化するシミュレータである。また、ビジョンを広く共有するためのツールとして地方公共団体やコンサルタント等が活用しやすいよう、データ整備～シナリオ設定～シミュレーション～可視化までを簡便に実施することができるユーザーインターフェースを実装している。</p>
+<p>本都市構造シミュレーションシステムは、ArcGISのツールボックスとしてOSSとして開発をしており、ファイルをPLATEAUホームページよりダウンロードすることで、ArcGIS Proを利用可能なPCであれば、無料で利用することが可能である。<br>
+<img src="../resources/03system_overview/01image10.png"><br>
+<strong>都市構造シミュレーションシステムの概要</strong></p>
+<h2 id="32-システムの利用フロー">3.2. システムの利用フロー</h2>
+<p>ユーザーは初めにソフトウェアのインストールを行い、各機能を利用可能な状態にする。ユーザーはソフトウェアインストール後に建築物データ作成機能及びインプットデータ生成機能を実行し、初期データのセットアップを行う。ユーザーは初期セットアップ完了後、シミュレーションのためのシナリオ設定を行う。シナリオ設定は初期セットアップ時に設定したゾーン毎に行う。</p>
+<p>シナリオ設定後、作成したシナリオデータを都市構造シミュレーションに渡し実行する。都市構造シミュレーションは作成したシナリオ毎に実行する。</p>
+<p>ユーザーは3D可視化機能によりシミュレーション結果を3D地図上に可視化する。ユーザーは同一シナリオの年次毎の比較やシナリオ間の比較を行い、適切な施策の検討に用いる。<br>
+<img src="../resources/03system_overview/usage-flow.png"><br>
+<strong>システムの利用フロー</strong></p>
+<h2 id="33-各システムの機能概要">3.3. 各システムの機能概要</h2>
+<p>実証システムの機能概要は以下の通りである。</p>
+<table>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 21%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>分類</strong></th>
+<th><strong>機能名</strong></th>
+<th><strong>機能説明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td rowspan="3">建築物データ作成機能</td>
+<td>FootPrint作成</td>
+<td><ul>
+<li><p>建築物データの立地していない空地に対して、今後建築物が建設され得る領域としてFootPrintを追加作成</p></li>
+<li><p>商業地域において敷地が統合されるFootPrintを作成</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>欠損値補完</td>
+<td><ul>
+<li><p>建築物データの用途、地上階数、延べ床面積、築年数の欠損を補完</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>ゾーンコード等付与</td>
+<td><ul>
+<li><p>建築物データの各FootPrintのポリゴン重心が位置するゾーンのゾーンコードを建築物データに付与、また建築物データの各FootPrintのポリゴン重心と最寄り鉄道駅との直線距離と駅名及び前面道路幅員を付与</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td rowspan="4">インプットデータ作成機能</td>
+<td>呼出し</td>
+<td><ul>
+<li><p>ユーザーからのファイルパス入力を受け付けた上で、各データ作成機能を呼出し、ファイルパスを受け渡す</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>ゾーンデータ作成機能</td>
+<td><ul>
+<li><p>ゾーンデータに、そのゾーン内に立地する公共施設の数を集計して付与</p></li>
+<li><p>また、ゾーンデータに、そのゾーン内の最も多くを占める用途地域を付与、そのゾーンのポリゴン重心と最寄り鉄道駅との直線距離と駅名を付与</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>交通データ作成機能</td>
+<td><ul>
+<li><p>全てのゾーンペアに対して、ポリゴン重心間の移動時間を鉄道、バス、自動車それぞれ作成して出力</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>個人データ生成</td>
+<td><ul>
+<li><p>国勢調査人口データとゾーンデータから、個人の性年齢・世帯類型等の属性と居住地のデータを出力</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td rowspan="2">シナリオ設定UI機能</td>
+<td>ゾーン情報設定</td>
+<td><ul>
+<li><p><u>都市計画情報設定</u><br>
+シナリオ設定UIおけるゾーンの選択、選択したゾーンの用途地域及び容積率の変更、変更後の建築物データ・ゾーンデータ出力</p></li>
+<li><p><u>施設数設定</u><br>
+シナリオ設定UIおけるゾーンの選択、選択したゾーンの公共施設数の変更、変更後のゾーンデータの出力</p></li>
+<li><p><u>都市機能誘導・居住誘導施策設定</u><br>
+シナリオ設定UIおけるゾーンの選択、選択したゾーンの都市機能誘導施策（商業地価の増減割合）の設定、居住誘導施策（住宅地価の増減割合）の設定、変更後のゾーンデータの出力</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>当該ゾーン間所要時間設定</td>
+<td><ul>
+<li><p>シナリオ設定UIおけるゾーンの選択、選択したゾーンを交通施策の対象とするかどうかのフラグ付与、鉄道乗車時間・待ち時間、バス乗車時間・待ち時間等の増減割合の設定、変更後の手段別ゾーン間所要時間データの出力</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>都市構造シミュレーション機能</td>
+<td>都市構造シミュレーション機能</td>
+<td><ul>
+<li><p><u>地価モデル</u><br>
+周辺の人口や建築物の立地状況、他ゾーンまでの所要時間等から、ゾーン毎の住宅地価及び商業地価を出力</p></li>
+<li><p><u>転居発生・転入転出・居住地選択モデル</u><br>
+個人の性年齢・世帯類型等から、個人毎に翌年の年齢・世帯類型、転居有無、市外への転出・市内への転入の有無、転居後の居住地を出力</p></li>
+<li><p><u>敷地統合分割モデル</u><br>
+ゾーンの地価や用途地域、容積率、他ゾーンまでの所要時間等から、個々の建築物が隣接する建築物と敷地を統合して一体的な敷地となるかどうか、個々の建築物が複数の敷地に分割され別々の敷地となるかどうかを出力</p></li>
+<li><p><u>除却・建設・用途選択モデル</u><br>
+ゾーンの地価や用途地域、容積率、他ゾーンまでの所要時間等から、個々の建築物が除却有無、空地への新規建設有無、建設される場合の用途・階数・高さ・延べ床面積を出力</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>3D可視化機能</td>
+<td>可視化</td>
+<td><ul>
+<li><p>シミュレーションの結果をArcGIS Proの画面上に3次元で可視化する</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<h2 id="34-必要な入力データの種類">3.4. 必要な入力データの種類</h2>
+<p>シミュレーションを実施するために準備する必要があるデータは以下のとおりである。</p>
+<p>（具体的な整備方法は、<a href="#2103-%E3%83%87%E3%83%BC%E3%82%BF%E6%95%B4%E5%82%99%E6%96%B9%E6%B3%95">データの準備</a>を参照）</p>
+<h3 id="341-建築物データ作成機能">3.4.1. 建築物データ作成機能</h3>
+<ul>
+<li>建築物データ [GeoDataBase形式]</li>
+<li>土地利用現況データ[GeoDataBase形式]</li>
+<li>都市計画決定情報データ[GeoDataBase形式]</li>
+<li>ゾーンポリゴンデータ[shp形式]</li>
+<li>道路NWデータ[shp形式]</li>
+<li>鉄道駅位置データ[csv形式]</li>
+</ul>
+<h3 id="342-インプットデータ生成機能">3.4.2. インプットデータ生成機能</h3>
+<ul>
+<li>ゾーンポリゴンデータ[shp形式]</li>
+<li>施設ポイントデータ[csv形式]</li>
+<li>道路NWデータ[shp形式]</li>
+<li>鉄道駅位置データ[csv形式]</li>
+<li>鉄道ＮＷデータ[shp形式]</li>
+<li>バス停位置データ[csv形式]</li>
+<li>バスＮＷデータ[csv形式]</li>
+<li>国勢調査メッシュ別人口データ[txt形式]</li>
+<li>250mメッシュポリゴンデータ[shp形式]</li>
+<li>国勢調査世帯別人口データ[csv形式]</li>
+</ul>
+<h3 id="343-都市構造シミュレーション機能">3.4.3. 都市構造シミュレーション機能</h3>
+<ul>
+<li>地価データ[shp形式]</li>
+</ul>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
