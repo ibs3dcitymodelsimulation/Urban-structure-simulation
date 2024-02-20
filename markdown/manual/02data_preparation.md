@@ -267,8 +267,6 @@ SHP形式のLine型のNWデータ及びPoint型のノードデータの2種類�
 
 道路NWデータ作成には、OpenStreetMapのデータを用いる。
 
-また、OpenStreetMapのデータに対し、[ゾーンポリゴンデータ](#24-ゾーンポリゴンデータ)にて作成したSHP形式のデータを利用することで、シミュレーション対象エリアを切り出すことが可能である。
-
 ただし、OpenStreetMapはオープンデータで地理情報を作成するプロジェクトであり、各自治体の最新の道路状況が反映されているか、必要な属性が付与されているか等の確認が必要である。
 
 有償のデータとしては、[デジタル道路地図（DRM: Digital Road Map）](https://www.drm.jp/database/)があり、こちらを用いることも可能である。
@@ -277,56 +275,48 @@ SHP形式のLine型のNWデータ及びPoint型のノードデータの2種類�
 
 OpenStreetMapのデータを利用する場合の整備方法を示す。
 
-#### 2.6.3.1. OpenStreetMapのデータからシミュレーション対象範囲を切り出す
+#### 2.6.3.1. OpenStreetMapのデータをダウンロードする
 
-まず、[OpenStreetMap Data Extractsのうち、範囲をAsia-Japanと絞ったあとのデータ](https://download.geofabrik.de/asia/japan.html)から、シミュレーション対象としたい範囲を含むデータを「.osm.pbf」形式でダウンロードする。<br>
+まず、「OSMDataGenerator.exe」を実行する。このとき、「control.txt」の1行目には、シミュレーション対象エリアのOpenStreetMapデータを入手するために「市区町村名,都道府県名,Japan」と入力する。<br>
 <img src="../resources/02data_preparation/02image24.png">
 
-ダウンロードしたファイルをGISソフトで開き、[ゾーンポリゴンデータ](#24-ゾーンポリゴンデータ)にて作成したSHP形式のデータを利用することで、シミュレーション対象エリアを切り出す操作を行う。例として、QGISを使用する場合の手順を示す。なお、QGISの各種操作に関しては、QGISのDocumantation(https://docs.qgis.org/3.4/ja/docs/index.html）も参考にされたい。
+実行が終了するとdataフォルダが生成され、data>graph_shapefileの中に、「edges」と「nodes」に関する各種ファイルが格納される。<br>
+<img src="../resources/02data_preparation/02image25.png">
 
-まず、QGISを開いて、「.osm.pdf」ファイルをレイヤに追加する。追加したとき、追加するアイテムを選択する必要があるため、linesを選択し、レイヤを追加を押す。<br>
-<img src="../resources/02data_preparation/02image26.png"/>
+ダウンロードしたファイルをGISソフトで開き、データの整備を行う。例として、QGISを使用する場合の手順を示す。なお、QGISの各種操作に関しては、[QGISのDocumantation](https://docs.qgis.org/3.4/ja/docs/index.html)も参考にされたい。
 
-[ゾーンポリゴンデータ](#24-ゾーンポリゴンデータ)にて作成した、「Zone_Polygon.shp」をレイヤに追加し、図示したのち、「Zone_Polygon.shp」より広い範囲の地物を選択する。<br>
+#### 2.6.3.2. Road_Nodeの属性フィールドの調整
+
+はじめに、QGISを開いて、「edges.shp」「nodes.shp」ファイルをレイヤに追加する。
+
+**NodeID,Lat,Lonの設定**
+
+レイヤにてnodesレイヤを選択し、プロセシング(C)－ツールボックス(T)に進み、「属性をリファクタリング」を検索する。
+属性の対応関係の名前欄から、各種名称を変更する。「osmid」は「NodeID」、「y」は「Lat」、「x」は「Lon」と変更し、不要な「highway」「street_cou」「ref」は削除する。
+属性を追加から、「NextMesh」「NextNodeID」を追加し、型は整数(64bit)とする。
+順番を「NodeID」「Lat」「Lon」「NextMesh」「NextNodeID」に並び替え、
+再構築レイヤにて形式は「ESRI Shapefile」、ファイル名は「Road_Node.shp」に指定し、実行ボタンを押す。<br>
+<img src="../resources/02data_preparation/02image26.png">
+
+**NextMesh, NextNodeIDの設定**
+
+続いて、追加されたRoad_Nodeに対してフィールド計算機を開き、「既存のフィールドを更新」にチェックを入れ、「NextMesh」を選択。式に以下を入力し、OKボタンを押す。
+```
+case when "NextMesh" is NULL then 0 else "NextMesh" end
+```
+「NextNodeID」に対しても同様の操作を行う。式に以下を入力し、OKボタンを押す。
+```
+case when "NextNodeID" is NULL then 0 else "NextNodeID" end
+```
+
+上記の操作で、「NextMesh」と「NextNodeID」のNULLが0で埋められた。<br>
 <img src="../resources/02data_preparation/02image27.png">
 
-linesレイヤを右クリックし、エクスポート、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名はなんでも良いが、ここでは「lines.shp」とし、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。<br>
-<img src="../resources/02data_preparation/02image28.png">
+**Road_Node.shpの出力**
 
-続いて、[ゾーンポリゴンデータ](#24-ゾーンポリゴンデータ)にて作成した形にデータを切り抜くため、ベクタ（O）ー空間演算ツール（G）ー切り抜く（Clip）と選択し、入力レイヤを「lines.shp」、オーバーレイレイヤを「Zone_Polygon.shp」、出力レイヤを「Road_NW.shp」として、実行を押す。<br>
-<img src="../resources/02data_preparation/02image30.png">
+上記ポイントデータを、shpファイル形式で出力する。Road_Nodeのレイヤを右クリックし、エクスポート(x)－新規ファイルに地物を保存(A)を選択する。形式は「ESRI Shapefile」、ファイル名は「Road_Node.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。
 
-以上の操作から、対象エリアに絞ったNWデータを切り出すことができた。
-
-#### 2.6.3.2. Road_Nodeの作成
-
-次に、NWデータからポイントデータを生成する。「Road_NW.shp」のレイヤに対してフィールド計算機から、「xat(0)」と入力することで、リンクの始点経度が計算される。この時、フィールド型は小数点付き数値（real）とし、精度は7、ここでの名称は、「LonFrom」とする。<br>
-<img src="../resources/02data_preparation/02image31.png">
-
-同様に、終点経度は「xat(-1)」と入力し、名称は「LonTo」、始点緯度は「yat(0)」と入力し、名称は「LatFrom」、終点緯度は「yat(-1)」と入力し、名称は「LatTo」とする。
-
-「Road_NW」レイヤを右クリックし、エクスポートー新規ファイルに保存から、形式をカンマで区切られた値[csv]を選択し、タブ下部の「保存されたファイルを地図に追加する」のチェックを外した上で、OKを押して「Road_Node.csv」を保存する。
-
-#### 2.6.3.3. Road_Nodeの属性フィールドの調整
-
-「Road_Node.csv」をEXCELから開き、「LonFrom」、「LonTo」、「LatFrom」、「LatTo」の列以外は削除する。新たに「Lat」列を作成し、「LatFrom」、「LatTo」を縦に並べる。同様に、新たに「Lon」列を作成し、「LonFrom」、「LonTo」を縦に並べる。データを切り貼りする際、「Ctrl+Shift+↓」で一番下のデータまで選択することが可能である。その後、「Lat」「Lon」の2列全体を選択した後、データタブのデータツールにおける重複の削除を選択し、現在選択されている範囲を並び替えるにチェック、重複の削除を押し、OKを押す。<br>
-<img src="../resources/02data_preparation/02image32.png">
-
-続いて、「NodeID」列を追加し、1から連番で数字を割り振る。「NextMesh」「NextNodeID」列も追加し、順番を「NodeID」「Lat」「Lon」「NextMesh」「NextNodeID」に並び替え、保存する。<br>
-<img src="../resources/02data_preparation/02image33.png">
-
-QGISに戻り、レイヤーレイヤを追加―CSVテキストレイヤを追加と選択し、ファイル名は「Road_Node.csv」を選択、ジオメトリ定義をポイント座標X値：Lon、Y値：Lat、座標参照系はEPSG:6697、文字コードはShift_JISを選択し、追加を押すと、ポイントデータが描画される。<br>
-<img src="../resources/02data_preparation/02image34.png">
-<img src="../resources/02data_preparation/02image35.png">
-
-上記ポイントデータを、shpファイル形式で出力する。Road_Nodeのレイヤを右クリックし、エクスポート、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名は「Road_Node.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。
-
-#### 2.6.3.4. Road_NWの属性フィールドの調整
-
-**Lengthの設定**
-
-「Road_NW.shp」レイヤに対して、フィールド計算機を開き、フィールド名を「Length」、フィールド型を小数点付き数値（real）とし、ジオメトリの「\$length」を選択、または、式に「\$length」と入力し、OKを押す。<br>
-<img src="../resources/02data_preparation/02image36.png">
+#### 2.6.3.3. Road_NWの属性フィールドの調整
 
 **RoadKindの設定**
 
@@ -344,30 +334,19 @@ QGISに戻り、レイヤーレイヤを追加―CSVテキストレイヤを追�
 | 9      |         | 上記以外を割り当てる |
 | 0      |         | 不明値を割り当てる   |
 
-「Road_NW.shp」レイヤに対して、フィールド計算機を開き、フィールド名を「RoadKind」、フィールド型を整数（32bit）とし、式に以下を入力し、OKを押す。
+edgesレイヤに対して、フィールド計算機を開き、フィールド名を「RoadKind」、フィールド型を整数(64bit)とし、式に以下を入力し、OKボタンを押す。
 
 ```
 CASE
-WHEN "highway" = 'motorway' THEN 1
-WHEN "highway" = 'trunk' THEN 2
-WHEN "highway" = 'primary' THEN 3
-WHEN "highway" = 'secondary' THEN 4
-WHEN "highway" = 'tertiary' THEN 5
-WHEN "highway" = 'unclassified' THEN 6
-WHEN "highway" = 'residential' THEN 7
-WHEN "highway" = 'NULL' THEN 0
+WHEN "highway" LIKE '%motorway%' THEN 1
+WHEN "highway" LIKE '%trunk%' THEN 2
+WHEN "highway" LIKE '%primary%' THEN 3
+WHEN "highway" LIKE '%secondary%' THEN 4
+WHEN "highway" LIKE '%tertiary%' THEN 5
+WHEN "highway" LIKE '%unclassified%' THEN 6
+WHEN "highway" LIKE '%residential%' THEN 7
+WHEN "highway" is NULL then 0
 ELSE 9
-END
-```
-
-**Separationの設定**
-
-「Road_NW.shp」レイヤに対して、フィールド計算機を開き、フィールド名を「Separation」、フィールド型を整数（32bit）とし、式に以下を入力し、OKを押す。
-
-```
-CASE
-WHEN "other_tags" LIKE '%"oneway"=\>"yes"%' THEN 1
-ELSE 0
 END
 ```
 
@@ -387,39 +366,34 @@ END
 | 2.000  | 9        |
 | 2.000  | 0        |
 
-「Road_NW.shp」レイヤに対して、フィールド計算機を開き、フィールド名を「Width」、フィールド型を小数点付き数値（real）とし、式に以下を入力し、OKを押す。
+edgesレイヤに対して、フィールド計算機を開き、フィールド名を「Width」、フィールド型を小数点付き数値(real)とし、式に以下を入力し、OKを押す。
 
 ```
 CASE
-WHEN "RoadKind" = 1 or 2 THEN 16.000
-WHEN "RoadKind" = 3 or 4 THEN 8.000
-WHEN "RoadKind" = 5 or 6 or 7 THEN 4.000
-WHEN "RoadKind" = 9 or 0 THEN 2.000
+WHEN "RoadKind" = 1 THEN 16.000
+WHEN "RoadKind" = 2 THEN 16.000
+WHEN "RoadKind" = 3 THEN 8.000
+WHEN "RoadKind" = 4 THEN 8.000
+WHEN "RoadKind" = 5 THEN 4.000
+WHEN "RoadKind" = 6 THEN 4.000
+WHEN "RoadKind" = 7 THEN 4.000
+WHEN "RoadKind" = 9 THEN 2.000
+WHEN "RoadKind" = 0 THEN 2.000
 END
 ```
 
-**NodeIDFrom, NodeIDToの設定**
+**その他属性フィールドの設定**
 
-「Road_NW.shp」レイヤをcsvファイルとしてエクスポートし、「Road_NW.csv」に対して、新たなページに「Road_Node.csv」も貼り付ける。「Road_Node」シートにおいて、一番左に、Lat列とLon列の文字列を結合した列を追加する（例えば、「=C2&D2」とする）。<br>
-<img src="../resources/02data_preparation/02image37.png">
+レイヤにてedgesレイヤを選択し、プロセシング(C)－ツールボックス(T)に進み、「属性をリファクタリング」を検索する。
+属性の対応関係の名前欄から、各種名称を変更する。「osmid」は「NodeID」、「u」は「NodeIDFrom」、「x」は「NodeIDTo」、「u」は「NodeIDFrom」、「v」は「NodeIDTo」、「length」は「Length」、「oneway」は「Separation」と変更し、不要な列は削除する。
+属性を追加から、「Passage」「DirectRag」「Speed」「Driveway」「Mainroad」を追加し、型は整数(64bit)とする。
+順番を以下の通り並び替え、再構築レイヤにて形式は「ESRI Shapefile」、ファイル名は「Road_NW.shp」に指定し、実行ボタンを押す。<br>
 
-「Road_NW」シートにおいて、同様にFromに関してLat列とLon列の文字列を結合した列（例えば、FromLatLon）、Toに関してLat列とLon列の文字列を結合した列（例えば、ToLatLon）を用意する。「NodeIDFrom」「NodeIDTo」列を追加し、それぞれの列に対してVLOOKUP関数を用いて、「Road_Node」シートのNodeIDを対応付ける（例えば、「=VLOOKUP(S2,Road_Node!\$A:\$B,2,FALSE)」とする）。<br>
-<img src="../resources/02data_preparation/02image38.png">
+`LinkID、NodeIDFrom、NodeIDTo、Length、Passage、DirectRag、RoadKind、Speed、Driveway、Mainroad、Separation、Width`
 
-作成した「Road_NW.csv」を再度QGISにインポートし、「Road_NW.shp」を右クリックープロパティーテーブル結合―「+」ボタンと進み、結合レイヤを「Road_NW.csv」、結合基準の属性を「LinkID」、ターゲット属性を「osm_id」とし、「フィールド名の接頭辞」にチェックを入れ、接頭辞に指定されているファイル名を削除する。設定が完了したら、OKを押す。<br>
-<img src="../resources/02data_preparation/02image39.png">
+<img src="../resources/02data_preparation/02image28.png">
 
-**LinkIDの設定**
-
-osm_idの列名をLinkIDに改名する。
-
-最後に、QGISのプロセシングツールボックスに進み、「属性をリファクタリング」を検索し、名称を確認し、順番を以下の通りに並び替える。編集が終了したら、実行を押す。
-
-`LinkID、NodeIDFrom、NodeIDTo、Length、Passage（新たに作成）、DirectRag（新たに作成）、RoadKind、Speed（新たに作成）、Driveway（新たに作成）、Mainroad（新たに作成）、Separation、Width`
-
-<img src="../resources/02data_preparation/02image40.png">
-
-上記NWデータを、shpファイル形式で出力する。Road_NWのレイヤを右クリックし、エクスポート、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名は「Road_NW.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。
+上記NWデータを、shpファイル形式で出力する。Road_NWのレイヤを右クリックし、エクスポート(x)－新規ファイルに地物を保存(A)を選択する。形式は「ESRI Shapefile」、ファイル名は「Road_NW.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。
 
 以下のフォルダーに配置する。
 
