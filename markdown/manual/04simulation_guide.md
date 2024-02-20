@@ -65,7 +65,7 @@ Simulation\Tool\PlateauSimulationTools.atbx
 **シナリオ設定UI入力パラメータ一覧表**
 
 <table>
-  <tr><th colsplan="2">入力項目</th><th>入力する内容</th></tr>
+  <tr><th colspan="2">入力項目</th><th>入力する内容</th></tr>
   <tr><td rowspan="5">施設数</td><td>図書館の数</td><td>ゾーン内の図書館の数を指定します</td></tr>
   <tr><td>病院の数</td><td>ゾーン内の病院の数を指定します</td></tr>
   <tr><td>中学校の数</td><td>ゾーン内の中学校の数を指定します</td></tr>
