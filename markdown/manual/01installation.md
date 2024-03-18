@@ -2,7 +2,7 @@
 
 ## 1.1. プログラムの配置
 
-「plateau-urban-structure-simulation-arcgis.zip」を任意のフォルダーに配置し解凍する。
+「plateau-urban-structure-simulation-arcgis.zip」を任意のフォルダーに配置し、解凍する。
 
 ## 1.2. ArcGIS Proの設定
 
@@ -20,7 +20,7 @@ ArcGIS Proを起動する。
 
 ![フォルダーの接続完了画面](../resources/01installation/fig5.png)
 
-以降の説明で示すファイルパスは `plateau-urban-structure-simulation-arcgis` フォルダーからの相対パスを記述する。
+以降の説明では `plateau-urban-structure-simulation-arcgis` フォルダーからの相対パスを記述する。
 
 ## 1.3. ローカルシーンの起動
 
