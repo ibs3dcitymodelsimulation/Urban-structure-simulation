@@ -386,9 +386,9 @@
 <img src="../resources/02data_preparation/01image11.png"></p>
 <p>次に、ダウンロードしたzipファイルを解凍し、GISソフトで開き、空間座標系、フィールドの調整を行う。例として、QGISを使用する場合の手順を示す。なお、QGISの各種操作に関しては、<a href="https://docs.qgis.org/3.4/ja/docs/index.html">QGISのDocumantation</a>も参考にされたい。まず、QGISを開いて、shpファイルをレイヤに追加する。追加したレイヤは、編集モードに切り替える。<br>
 <img src="../resources/02data_preparation/01image12.png"><br></p>
-<p>Zone_code列を作成する。Zone_code列にはゾーンポリゴンごとにユニークな文字列を入れる必要がある。たとえば、str型のZone_code列を作成し、式に<code>to_string(@row_number)</code>を入力することで作成できる。<br>
+<p>Zone_code列を作成する。Zone_code列にはゾーンポリゴンごとにユニークな文字列を入れる必要がある。例えば、str型のZone_code列を作成し、式に<code>to_string(@row_number)</code>を入力することで作成できる。<br>
 <img src="../resources/02data_preparation/01image13.png"></p>
-<p>不要なフィールドを削除する。ここでは、Zone_code以外のフィールドを削除する。フィールドを削除するには、レイヤを編集モードに切り替えたのち、属性テーブルを開き、フィールドの削除を選択、削除するフィールドをすべて選択してOKを押す。<br>
+<p>不要なフィールドを削除する。ここでは、Zone_code以外のフィールドを削除する。フィールドを削除するには、レイヤを編集モードに切り替えた後、属性テーブルを開き、フィールドの削除を選択、削除するフィールドをすべて選択してOKを押す。<br>
 <img src="../resources/02data_preparation/01image14.png"></p>
 <p>ポリゴンの重心を計算する。プロセシングツールボックス/ベクタジオメトリ/重心を選択し、実行する。重心レイヤが作成される。<br>
 <img src="../resources/02data_preparation/01image15.png"></p>
@@ -396,7 +396,7 @@
 <img src="../resources/02data_preparation/01image16.png"></p>
 <p>小地域ポリゴンに、重心の緯度経度を付与する。小地域ポリゴンのレイヤを右クリックし、プロパティを開き、テーブル結合を選択する。結合するレイヤは「重心」、結合基準の属性とターゲット属性はいずれも「Zone_code」を選択する。属性名の接頭辞にチェックを入れ、接頭辞を空白にし、OKを押す。<br>
 <img src="../resources/02data_preparation/01image17.png"></p>
-<p>shpファイル形式で出力する。小地域ポリゴンのレイヤを右クリックし、エクスポート、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名は「Zone_Polygon.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。<br>
+<p>shpファイル形式で出力する。小地域ポリゴンのレイヤを右クリックして、エクスポートし、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名は「Zone_Polygon.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。<br>
 <img src="../resources/02data_preparation/01image18.png"></p>
 <p>以上の手順で作成したデータを、以下のフォルダーに配置する。</p>
 <pre><code>InputDataGeneration\InputDataGeneration\Input
@@ -472,17 +472,17 @@
 <p>ダウンロードしたzipファイルを解凍し、csv形式に変換する。ここでは、QGISを使用した手順を示す。</p>
 <p>まず、QGISを開いて、各shpファイルをレイヤに追加する。<br>
 <img src="../resources/02data_preparation/01image19.png"></p>
-<p>レイヤを選択し、編集モードに変換、緯度経度を表すLat列とLon列を作成する。この手順はゾーンポリゴンデータ作成と同様である。2列を作成したら、編集モードを終了する。この操作を、各レイヤそれぞれについて実施する。<br>
+<p>レイヤの選択、編集モードへの変換を行った後、緯度経度を表すLat列とLon列を作成する。この手順はゾーンポリゴンデータ作成と同様である。これらの2列を作成したら、編集モードを終了する。この操作を、各レイヤについて実施する。<br>
 <img src="../resources/02data_preparation/01image20.png"></p>
-<p>各レイヤを、csv形式で出力する。レイヤを右クリックしてエクスポートを選択、ファイル名は任意にせて地してOKを押す。<br>
+<p>各レイヤを、csv形式で出力する。レイヤを右クリックしてエクスポートを選択し、ファイル名は任意に設定してOKを押す。<br>
 <img src="../resources/02data_preparation/01image21.png"></p>
-<p>出力したcsvファイルを、Excelで開いて編集する。適宜、国土数値情報ダウンロードにて公開されている各データの標準製品仕様を確認しながら作業を進める。</p>
+<p>出力したcsvファイルを、Excelで開いて編集する。適宜、国土数値情報ダウンロードサイトにおいて公開されている各データの標準製品仕様を確認しながら作業を進める。</p>
 <p>まず、図書館のポイントデータを作成する。公共施設（ポイント）データをcsv出力したものをExcelで開き、フィルターを用いて「P02_003」列が「3003」である列に絞る。<br>
 <img src="../resources/02data_preparation/01image22.png"></p>
-<p>Lat列とLon列を選択し、別のシートにコピーして貼り付ける。name列、Facility_type列を作成する。name列には自由に施設名称を追加するこができる。Facility_type列には、すべて「1」を入力する。<br>
+<p>Lat列とLon列を選択し、別のシートにコピーして貼り付ける。name列、Facility_type列を作成する。name列には自由に施設名称を追加することができる。Facility_type列には、すべて「1」を入力する。<br>
 <img src="../resources/02data_preparation/01image23.png"></p>
 <p>同様の手順で、病院、診療所、小学校、中学校、幼稚園こども園についても作成する。</p>
-<p>病院は、医療機関（ポイント）データのうち、「P04_001」列が「1」のデータを用いる。診療所は、医療機関（ポイント）データのうち、「P04_001」列が「2」のデータを用いる。小学校は、学校（ポイント）データのうち、「P29_003」列が「16001」のデータを用いる。中学校は、学校（ポイント）データのうち、「P29_003」列が「16002」のデータを用いる。幼稚園こども園は、学校（ポイント）データのうち、「P29_003」列が「16011」「16013」のデータを用いる。なお、これらの列名やコードは、各データの仕様が変更されればこの通りではなくなるため、ダウンロードするデータの仕様を確認しながら適切に選択されたい。Facility_type列は、1:図書館,2:病院,3:診療所,4:小学校,5:中学校,6:幼稚園こども園となるように値を入力する。</p>
+<p>病院は、医療機関（ポイント）データのうち、「P04_001」列が「1」のデータを用いる。診療所は、医療機関（ポイント）データのうち、「P04_001」列が「2」のデータを用いる。小学校は、学校（ポイント）データのうち、「P29_003」列が「16001」のデータを用いる。中学校は、学校（ポイント）データのうち、「P29_003」列が「16002」のデータを用いる。幼稚園こども園は、学校（ポイント）データのうち、「P29_003」列が「16011」・「16013」のデータを用いる。なお、これらの列名やコードは、各データの仕様が変更されればこの通りではなくなるため、ダウンロードするデータの仕様を確認しながら適切に選択されたい。Facility_type列は、1:図書館,2:病院,3:診療所,4:小学校,5:中学校,6:幼稚園こども園となるように値を入力する。</p>
 <p>最後に、以上の手順で作成したデータをExcel上で縦に結合し、「Facility_Point.csv」として保存し、以下のフォルダーに配置する。</p>
 <pre><code>InputDataGeneration\InputDataGeneration\Input
 </code></pre>
@@ -580,7 +580,7 @@
 </tr>
 </tbody>
 </table>
-<p>※ジオメトリは、line型、JGD2011(EPSG:6697)で整備</p>
+<p>※ジオメトリは、line型、JGD2011（EPSG:6697）で整備</p>
 <p>※「＊」が付いている項目は空欄でもプログラム実行可能</p>
 <p><strong>道路NW（ノードデータ）</strong></p>
 <table>
@@ -645,16 +645,13 @@
 <img src="../resources/02data_preparation/02image25.png"></p>
 <p>ダウンロードしたファイルをGISソフトで開き、データの整備を行う。例として、QGISを使用する場合の手順を示す。なお、QGISの各種操作に関しては、<a href="https://docs.qgis.org/3.4/ja/docs/index.html">QGISのDocumantation</a>も参考にされたい。</p>
 <h4 id="2632-road_nodeの属性フィールドの調整">2.6.3.2. Road_Nodeの属性フィールドの調整</h4>
-<p>はじめに、QGISを開いて、「edges.shp」「nodes.shp」ファイルをレイヤに追加する。</p>
+<p>はじめに、QGISを開いて、「edges.shp」ファイル、「nodes.shp」ファイルをレイヤに追加する。</p>
 <p><strong>NodeID,Lat,Lonの設定</strong></p>
-<p>レイヤにてnodesレイヤを選択し、プロセシング(C)－ツールボックス(T)に進み、「属性をリファクタリング」を検索する。
-属性の対応関係の名前欄から、各種名称を変更する。「osmid」は「NodeID」、「y」は「Lat」、「x」は「Lon」と変更し、不要な「highway」「street_cou」「ref」は削除する。
-属性を追加から、「NextMesh」「NextNodeID」を追加し、型は整数(64bit)とする。
-順番を「NodeID」「Lat」「Lon」「NextMesh」「NextNodeID」に並び替え、
-再構築レイヤにて形式は「ESRI Shapefile」、ファイル名は「Road_Node.shp」に指定し、実行ボタンを押す。<br>
+<p>レイヤにおいてnodesレイヤを選択し、プロセシング(C)－ツールボックス(T)に進み、「属性をリファクタリング」を検索する。属性の対応関係の名前欄から、各種名称を変更する。「osmid」は「NodeID」、「y」は「Lat」、「x」は「Lon」と変更し、不要な「highway」、「street_cou」、「ref」は削除する。
+属性を追加から、「NextMesh」「NextNodeID」を追加し、型は整数（64bit）とする。順番を「NodeID」、「Lat」、「Lon」、「NextMesh」、「NextNodeID」の順に並び替え、再構築レイヤにおいて形式は「ESRI Shapefile」、ファイル名は「Road_Node.shp」に指定し、実行ボタンを押す。<br>
 <img src="../resources/02data_preparation/02image26.png"></p>
 <p><strong>NextMesh, NextNodeIDの設定</strong></p>
-<p>続いて、追加されたRoad_Nodeに対してフィールド計算機を開き、「既存のフィールドを更新」にチェックを入れ、「NextMesh」を選択。式に以下を入力し、OKボタンを押す。</p>
+<p>続いて、追加されたRoad_Nodeに対してフィールド計算機を開き、「既存のフィールドを更新」にチェックを入れ、「NextMesh」を選択する。式に以下を入力し、OKボタンを押す。</p>
 <pre><code>case when &quot;NextMesh&quot; is NULL then 0 else &quot;NextMesh&quot; end
 </code></pre>
 <p>「NextNodeID」に対しても同様の操作を行う。式に以下を入力し、OKボタンを押す。</p>
@@ -723,7 +720,7 @@
 </tr>
 </tbody>
 </table>
-<p>edgesレイヤに対して、フィールド計算機を開き、フィールド名を「RoadKind」、フィールド型を整数(64bit)とし、式に以下を入力し、OKボタンを押す。</p>
+<p>edgesレイヤに対して、フィールド計算機を開き、フィールド名を「RoadKind」、フィールド型を整数（64bit）とし、式に以下を入力し、OKボタンを押す。</p>
 <pre><code>CASE
 WHEN &quot;highway&quot; LIKE '%motorway%' THEN 1
 WHEN &quot;highway&quot; LIKE '%trunk%' THEN 2
@@ -784,7 +781,7 @@ END
 </tr>
 </tbody>
 </table>
-<p>edgesレイヤに対して、フィールド計算機を開き、フィールド名を「Width」、フィールド型を小数点付き数値(real)とし、式に以下を入力し、OKを押す。</p>
+<p>edgesレイヤに対して、フィールド計算機を開き、フィールド名を「Width」、フィールド型を小数点付き数値（real）とし、式に以下を入力し、OKを押す。</p>
 <pre><code>CASE
 WHEN &quot;RoadKind&quot; = 1 THEN 16.000
 WHEN &quot;RoadKind&quot; = 2 THEN 16.000
@@ -798,10 +795,9 @@ WHEN &quot;RoadKind&quot; = 0 THEN 2.000
 END
 </code></pre>
 <p><strong>その他属性フィールドの設定</strong></p>
-<p>レイヤにてedgesレイヤを選択し、プロセシング(C)－ツールボックス(T)に進み、「属性をリファクタリング」を検索する。
-属性の対応関係の名前欄から、各種名称を変更する。「osmid」は「NodeID」、「u」は「NodeIDFrom」、「x」は「NodeIDTo」、「u」は「NodeIDFrom」、「v」は「NodeIDTo」、「length」は「Length」、「oneway」は「Separation」と変更し、不要な列は削除する。
-属性を追加から、「Passage」「DirectRag」「Speed」「Driveway」「Mainroad」を追加し、型は整数(64bit)とする。
-順番を以下の通り並び替え、再構築レイヤにて形式は「ESRI Shapefile」、ファイル名は「Road_NW.shp」に指定し、実行ボタンを押す。<br></p>
+<p>レイヤにおいてedgesレイヤを選択し、プロセシング(C)－ツールボックス(T)に進み、「属性をリファクタリング」を検索する。属性の対応関係の名前欄から、各種名称を変更する。「osmid」は「NodeID」、「u」は「NodeIDFrom」、「x」は「NodeIDTo」、「u」は「NodeIDFrom」、「v」は「NodeIDTo」、「length」は「Length」、「oneway」は「Separation」と変更し、不要な列は削除する。
+属性を追加から、「Passage」、「DirectRag」、「Speed」、「Driveway」、「Mainroad」を追加し、型は整数（64bit）とする。
+順番を以下の通りに並び替え、再構築レイヤにおいて形式は「ESRI Shapefile」、ファイル名は「Road_NW.shp」に指定し、実行ボタンを押す。<br></p>
 <p><code>LinkID、NodeIDFrom、NodeIDTo、Length、Passage、DirectRag、RoadKind、Speed、Driveway、Mainroad、Separation、Width</code></p>
 <img src="../resources/02data_preparation/02image28.png">
 <p>上記NWデータを、shpファイル形式で出力する。Road_NWのレイヤを右クリックし、エクスポート(x)－新規ファイルに地物を保存(A)を選択する。形式は「ESRI Shapefile」、ファイル名は「Road_NW.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。</p>
@@ -882,7 +878,7 @@ END
 <p>鉄道駅位置データには、鉄道事業者の情報等を用いる。</p>
 <p>自治体内の駅数が多い場合には、<a href="https://nlftp.mlit.go.jp/ksj/">国土数値情報ダウンロードサイト</a>より、「鉄道データ」がダウンロード可能であるため、活用することもできる。</p>
 <h3 id="273-データ整備方法">2.7.3. データ整備方法</h3>
-<p>自治体内の各駅について、鉄道事業者情報もしくは民間の地図データ（Google Map等）等の情報をもとに駅のリストをExcel等の表計算ソフトウェア上で入力し作成する。</p>
+<p>自治体内の各駅について、鉄道事業者情報又は民間の地図データ（Google Map等）等の情報をもとに駅のリストをExcel等の表計算ソフトウェア上で入力し、作成する。</p>
 <p><strong>鉄道駅位置データの各項目の作成方法</strong></p>
 <table>
 <thead>
@@ -1108,7 +1104,7 @@ END
 <h3 id="282-作成に利用するデータ">2.8.2. 作成に利用するデータ</h3>
 <p>鉄道NWデータには、鉄道事業者の情報等を用いる。</p>
 <h3 id="283-データ整備方法">2.8.3. データ整備方法</h3>
-<p>鉄道NWデータ（リンク情報）については、駅間の所要時間等の情報を鉄道事業者情報等をもとに、Excel等の表計算ソフトウェア上で入力し作成する。</p>
+<p>鉄道NWデータ（リンク情報）については、駅間の所要時間等を鉄道事業者情報等をもとに、Excel等の表計算ソフトウェア上で入力し、作成する。</p>
 <p><strong>鉄道NWデータ（リンク情報）の各項目の作成方法</strong></p>
 <table>
 <thead>
@@ -1178,17 +1174,17 @@ END
 </table>
 <p>※「＊」が付いている項目は空欄でもプログラム実行可能</p>
 <p>リンクの種類に関しては、幹線リンク、駅ダミーリンク、乗換リンク（自路線乗換リンク、他路線乗換リンク）が存在する。幹線リンクと駅ダミーリンクは下図のようなイメージである。</p>
-<p>ここで駅ダミーリンクはホームを想定しているが、基本的には駅ノードと1対1対応するように作成し問題ない。乗換時間を詳細に加味したい場合には、駅ダミーを複数作成し、駅ダミー間に後述する乗換リンクを作成し所要時間を設定することで、乗換時間を詳細に加味することができる。<br>
+<p>ここで駅ダミーリンクはホームを想定しているが、基本的には駅ノードと1対1対応するように作成して問題ない。乗換時間を詳細に加味したい場合には、駅ダミーを複数作成し、駅ダミー間に後述する乗換リンクを作成して所要時間を設定することで、乗換時間を詳細に加味することができる。<br>
 <img src="../resources/02data_preparation/01image38.png"></p>
 <p>幹線リンク、駅ダミーリンクの作成例は下図のとおりである。幹線リンクには駅間の所要時間及び運行本数（任意）等を入力する。駅ダミーリンクには、駅から乗車場所（ホーム）までの移動時間を所要時間として入力する。<br>
 <img src="../resources/02data_preparation/01image39.png"></p>
 <p>乗換リンク（自路線乗換リンク、他路線乗換リンク）の作成例は下図のとおりである。乗換リンクには、乗換に要する移動時間を所要時間として入力する。<br>
 <img src="../resources/02data_preparation/01image40.png"></p>
-<p>所要時間や運行本数は、鉄道事業者のホームページ等の時刻表情報を元に作成する。例えば、JR東日本では以下のように時刻表が掲載されているため、駅間の所要時間と運行本数を入力する。</p>
+<p>所要時間や運行本数は、鉄道事業者のホームページ等の時刻表情報をもとに作成する。例えば、JR東日本では以下のように時刻表が掲載されているため、駅間の所要時間と運行本数を入力する。</p>
 <p><a href="https://www.jreast-timetable.jp/2402/timetable/tt0248/0248050.html#time_16">https://www.jreast-timetable.jp/2402/timetable/tt0248/0248050.html#time_16</a></p>
 <p><a href="https://www.jreast-timetable.jp/2402/train/045/047621.html">https://www.jreast-timetable.jp/2402/train/045/047621.html</a></p>
 <img src="../resources/02data_preparation/01image41.png">
-<p>鉄道NWデータ（運賃（距離帯形式））、鉄道NWデータ（運賃（テーブル形式））については、鉄道事業者情報等をもとに、Excel等の表計算ソフトウェア上で入力し作成する。</p>
+<p>鉄道NWデータ（運賃（距離帯形式））、鉄道NWデータ（運賃（テーブル形式））については、鉄道事業者情報等をもとに、Excel等の表計算ソフトウェア上で入力し、作成する。</p>
 <p>なお、距離帯形式、テーブル形式のいずれか一方を作成すればよい。</p>
 <p><strong>鉄道NWデータ（運賃（距離帯形式））の各項目の作成方法</strong></p>
 <table>
@@ -1326,7 +1322,7 @@ END
 <p>バス停位置データには、GTFS（標準的なバス情報フォーマット）のデータを用いる。</p>
 <p>GTFSのデータは各データを整備している自治体や事業者のホームページで公表されている。公開されているホームページの一覧は<a href="https://tshimada291.sakura.ne.jp/transport/gtfs-list.html">https://tshimada291.sakura.ne.jp/transport/gtfs-list.html</a>等で確認することができる。</p>
 <p>GTFSの詳細な仕様やルールに関しては、<a href="https://www.mlit.go.jp/sogoseisaku/transport/sosei_transport_tk_000112.html">国土交通省の技術資料（仕様書、ガイドライン）</a>を参考にされたい。</p>
-<p>なお、GTFSで公開されているデータには、最新のバス路線に対応していない、位置情報等に不正確な情報が含まれている可能性があるため、留意して利用する必要がある。</p>
+<p>なお、GTFSで公開されているデータには、最新のバス路線に対応していない可能性や、位置情報等に不正確な情報が含まれている可能性があるため、留意して利用する必要がある。</p>
 <p>GTFSが整備されていない場合は、事業者のホームページ等のバス停マップや時刻表等を参照し作成する。なお、バス停位置情報に関しては、<a href="https://nlftp.mlit.go.jp/ksj/">国土数値情報ダウンロードサイト</a>より、「バス停留所（ポイント）」や「バスルート（ライン）」のデータがダウンロード可能であるため、活用することもできる。</p>
 <h3 id="293-データ整備方法">2.9.3. データ整備方法</h3>
 <p>GTFSのデータを利用する場合の整備方法を示す。</p>
@@ -1622,8 +1618,8 @@ END
 </tr>
 </tbody>
 </table>
-<p>バスNWデータ（リンク情報）を作成する際には、GTFSデータのstop_times.txtのデータを基に作成することになるが、stop_times.txtはダイヤデータであり各径路（route_id）の全てのダイヤ（trip_id）の情報が記録されているため（下図参照）、バスNWデータ（リンク情報）とする際には、各径路の代表的なダイヤ（trip_id）を1つだけ抜き出す。代表的なダイヤは、最も運行本数が多い時間帯や朝ピーク時に設定するなど、作成者の任意の方法で設定してかまわない。</p>
-<p>所要時間は、停留所間のarrival_timeの差分で算出する。また、運行本数はroute_id毎のtrip_idの数をカウントすることで作成する。<br>
+<p>バスNWデータ（リンク情報）を作成する際には、GTFSデータのstop_times.txtのデータをもとに作成することになるが、stop_times.txtはダイヤデータであり各径路（route_id）の全てのダイヤ（trip_id）の情報が記録されているため（下図参照）、バスNWデータ（リンク情報）とする際には、各径路の代表的なダイヤ（trip_id）を1つだけ抜き出す。代表的なダイヤは、最も運行本数が多い時間帯や朝ピーク時に設定するなど、作成者の任意の方法で設定してかまわない。</p>
+<p>所要時間は、停留所間のarrival_timeの差分で算出する。また、運行本数はroute_idごとのtrip_idの数をカウントすることで作成する。<br>
 <img src="../resources/02data_preparation/01image44.png"></p>
 <p>なお、stop_times.txtにはroute_idの情報が付与されておらず、trips.txt（下図参照）にtrip_idとroute_idの対応が整理されているため、参照して付与する。<br>
 <img src="../resources/02data_preparation/01image45.png"></p>
@@ -1641,14 +1637,14 @@ END
 ダウンロードしたファイルを解凍し、下記のフォルダーに配置する。</p>
 <pre><code>InputDataGeneration\InputDataGeneration\Input\pop_mesh
 </code></pre>
-<h2 id="212-500mメッシュポリゴンデータ">2.12. 500mメッシュポリゴンデータ</h2>
+<h2 id="212-250mメッシュポリゴンデータ">2.12. 250mメッシュポリゴンデータ</h2>
 <h3 id="2121-作成するデータ">2.12.1. 作成するデータ</h3>
 <p>５次メッシュ（250mメッシュ）のポリゴンデータである。</p>
 <h3 id="2122-作成に利用するデータ">2.12.2. 作成に利用するデータ</h3>
 <p><a href="https://www.e-stat.go.jp/">e-Stat</a>より、<a href="https://www.e-stat.go.jp/gis/statmap-search?page=1&amp;type=2&amp;aggregateUnitForBoundary=Q&amp;coordsys=1&amp;format=shape">5次メッシュ（250mメッシュ）のゾーンポリゴンのデータ</a>をダウンロードして使用する。</p>
 <h3 id="2123-データ整備方法">2.12.3. データ整備方法</h3>
 <p><a href="https://www.e-stat.go.jp/">e-Stat</a>より、シミュレーション対象範囲を含むすべての<a href="https://www.e-stat.go.jp/gis/statmap-search?page=1&amp;type=2&amp;aggregateUnitForBoundary=Q&amp;coordsys=1&amp;format=shape">5次メッシュ（250mメッシュ）のゾーンポリゴンのデータ</a>をダウンロードする。</p>
-<p>ダウンロードしたファイルを解凍し、下記のフォルダーに配置する。この際、shpファイルの他、dbf、prj、shxファイルもフォルダー内に配置する。</p>
+<p>ダウンロードしたファイルを解凍し、下記のフォルダーに配置する。この際、shpファイルのほか、dbf、prj、shxファイルもフォルダー内に配置する。</p>
 <pre><code>InputDataGeneration\InputDataGeneration\Input\zone_mesh
 </code></pre>
 <h2 id="213-国勢調査世帯類型別人口データ">2.13. 国勢調査世帯類型別人口データ</h2>
@@ -1704,38 +1700,38 @@ END
 </tbody>
 </table>
 <h3 id="2132-作成に利用するデータ">2.13.2. 作成に利用するデータ</h3>
-<p>e-Statで公表されている<a href="https://www.e-stat.go.jp/dbview?sid=0003445216">国勢調査 令和２年国勢調査 人口等基本集計　（主な内容：男女・年齢・配偶関係，世帯の構成，住居の状態，母子・父子世帯，国籍など）</a>を用いることができる。</p>
+<p>e-Statで公表されている<a href="https://www.e-stat.go.jp/dbview?sid=0003445216">国勢調査 令和2年国勢調査 人口等基本集計　（主な内容：男女・年齢・配偶関係，世帯の構成，住居の状態，母子・父子世帯，国籍など）</a>を用いることができる。</p>
 <h3 id="2133-データ整備方法">2.13.3. データ整備方法</h3>
-<p><a href="https://www.e-stat.go.jp/dbview?sid=0003445216">e-statの当該集計表のデータベース</a>にアクセスする。「表示項目選択」にて、フィルターを設定する。「配偶関係」は「総数」のみを選択する。「年齢」を、0～4歳、5～9歳、・・・、80～84歳、（再掲）85歳以上を選択する。「世帯の種類・世帯の家族類型・施設等の世帯の種類」は「総数」「夫婦のみの世帯」「夫婦と子供から成る世帯」「男親と子供から成る世帯」「女親と子供から成る世帯」を選択する。「全国～人口50万以上の市」では、シミュレーション対象とする市町村を選択する。<br>
+<p><a href="https://www.e-stat.go.jp/dbview?sid=0003445216">e-statの当該集計表のデータベース</a>にアクセスする。「表示項目選択」において、フィルターを設定する。「配偶関係」は「総数」のみを選択する。「年齢」は、0～4歳、5～9歳、・・・、80～84歳、（再掲）85歳以上を選択する。「世帯の種類・世帯の家族類型・施設等の世帯の種類」は「総数」、「夫婦のみの世帯」、「夫婦と子供から成る世帯」、「男親と子供から成る世帯」、「女親と子供から成る世帯」を選択する。「全国～人口50万以上の市」では、シミュレーション対象とする市町村を選択する。<br>
 <img src="../resources/02data_preparation/01image46.png"></p>
-<p>「確定」→「ダウンロード」を押し、ファイル形式は「CSV形式(列指向形式・Shift-JIS)」を選択、ダウンロードを行う。<br>
+<p>「確定」→「ダウンロード」を押し、ファイル形式は「CSV形式(列指向形式・Shift-JIS)」を選択した上で、ダウンロードを行う。<br>
 <img src="../resources/02data_preparation/01image47.png"></p>
 <p>ダウンロードしたcsvファイルをExcelで開き、加工する。</p>
 <p>年齢を表す「cat04_code」列のうち、85歳以上を表す「R5」については、「18」で置き換え、列名を「age」に変更する。</p>
 <p>性別を表す「cat01_code」列は、列名を「gender」に変更する。</p>
-<p>家族類型を表す「cat03_code」列は、列名を「family」に変更する。値は、1:単身世帯, 2:夫婦のみ世帯,3:夫婦と子の世帯,4:ひとり親と子の世帯となるように、Excel上で置換を行う。</p>
+<p>家族類型を表す「cat03_code」列は、列名を「family」に変更する。値は、1:単身世帯、2:夫婦のみ世帯、3:夫婦と子の世帯、4:ひとり親と子の世帯となるように、Excel上で置換を行う。</p>
 <p>人数を表す「value」列は、列名を「pop」に変更する。「-」は「0」で置換する。</p>
-<p>age, gender, family, pop以外の列を削除する。<br>
+<p>age、gender、family、pop以外の列を削除する。<br>
 <img src="../resources/02data_preparation/01image48.png"></p>
-<p>その他の世帯の人数を求める。まず、age, gender, family, popの4列を選択し、ピボットテーブルを作成、ageとgenderを行に、popを値に、familyをフィルターに設定する。familyは、合計を表す「0」を選択する。<br>
+<p>その他の世帯の人数を求める。まず、age、 gender、 family、 popの4列を選択し、ピボットテーブルを作成した上で、ageとgenderを行に、popを値に、familyをフィルターに設定する。familyは、合計を表す「0」を選択する。<br>
 <img src="../resources/02data_preparation/01image49.png"></p>
-<p>同様に、familyのフィルターを、合計を表す「0」以外を選択したものを、隣に作成する。<br>
+<p>同様に、familyのフィルターで、合計を表す「0」以外を選択したものを、隣に作成する。<br>
 <img src="../resources/02data_preparation/01image50.png"></p>
-<p>二つのピボットテーブルで集計された値の差分を計算する。これが、その他の世帯の性別年齢別人口となる。familyを「5」とし、ピボットテーブルで参照していた範囲の最下部に、コピーして貼り付ける。<br>
+<p>2つのピボットテーブルで集計された値の差分を計算する。これが、その他の世帯の性別年齢別人口となる。familyを「5」とし、ピボットテーブルで参照していた範囲の最下部に、コピーして貼り付ける。<br>
 <img src="../resources/02data_preparation/01image51.png"><br>
 <img src="../resources/02data_preparation/01image52.png"></p>
-<p>最後に、family列で「0」の行を削除し、シートを「Population_GenderAgeFamily.csv」として保存、以下のフォルダーに配置する。</p>
+<p>最後に、family列が「0」の行を削除した上で、シートを「Population_GenderAgeFamily.csv」として保存し、以下のフォルダーに配置する。</p>
 <pre><code>InputDataGeneration\InputDataGeneration\Input
 </code></pre>
 <h2 id="214-地価データ">2.14. 地価データ</h2>
 <h3 id="2141-作成するデータ">2.14.1. 作成するデータ</h3>
 <p>地価公示及び都道府県地価調査のポイントデータである。</p>
-<p><a href="https://nlftp.mlit.go.jp/ksj/">国土数値情報ダウンロードサイト</a>で公表されている、「地価公示（ポイント）」データおよび「都道府県地価調査（ポイント）」データの、製品仕様書第3.1版に準拠したものを用意する。</p>
+<p><a href="https://nlftp.mlit.go.jp/ksj/">国土数値情報ダウンロードサイト</a>で公表されている、「地価公示（ポイント）」データ及び「都道府県地価調査（ポイント）」データの、製品仕様書第3.1版に準拠したものを用意する。</p>
 <h3 id="2142-作成に利用するデータ">2.14.2. 作成に利用するデータ</h3>
 <p><a href="https://nlftp.mlit.go.jp/ksj/">国土数値情報ダウンロードサイト</a>より、「地価公示（ポイント）」「都道府県地価調査（ポイント）」のデータをダウンロードして使用する。</p>
 <h3 id="2143-データ整備方法">2.14.3. データ整備方法</h3>
-<p>シミュレーション対象とする範囲が含まれる、「地価公示（ポイント）」「都道府県地価調査（ポイント）」のデータをダウンロードする。</p>
-<p>ファイル名を、「地価公示（ポイント）」は「L01-20.shp」、「都道府県地価調査（ポイント）」は「L02-20.shp」とする。xml、dbf、prj、shxファイルについても、同様にファイル名を変更する。</p>
+<p>シミュレーション対象とする範囲が含まれる、「地価公示（ポイント）」、「都道府県地価調査（ポイント）」のデータをダウンロードする。</p>
+<p>ファイル名については、「地価公示（ポイント）」は「L01-20.shp」、「都道府県地価調査（ポイント）」は「L02-20.shp」とする。xml、dbf、prj、shxファイルについても、同様にファイル名を変更する。</p>
 <p>以下のフォルダーに配置する。</p>
 <pre><code>InputDataGeneration\InputDataGeneration\Input
 </code></pre>
