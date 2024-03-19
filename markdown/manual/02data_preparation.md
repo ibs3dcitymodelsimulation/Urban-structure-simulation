@@ -834,5 +834,5 @@ InputDataGeneration\Input
 以下のフォルダーに配置する。
 
 ```
-Simulation\BaseData\Input
+Simulation\BaseData
 ```
