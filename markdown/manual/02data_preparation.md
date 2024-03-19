@@ -163,7 +163,7 @@ shpファイル形式で出力する。小地域ポリゴンのレイヤを右�
 以上の手順で作成したデータを、以下のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input
+InputDataGeneration\Input
 ```
 
 ## 2.5. 施設ポイントデータ
@@ -226,7 +226,7 @@ Lat列とLon列を選択し、別のシートにコピーして貼り付ける�
 最後に、以上の手順で作成したデータをExcel上で縦に結合し、「Facility_Point.csv」として保存し、以下のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input
+InputDataGeneration\Input
 ```
 
 ## 2.6. 道路NWデータ
@@ -394,7 +394,7 @@ END
 以下のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input
+InputDataGeneration\Input
 ```
 
 ## 2.7. 鉄道駅位置データ
@@ -443,7 +443,7 @@ CSV形式で以下の情報を付与したデータである。
 最後に、以上の手順で作成したデータを「Rail_Station.csv」として保存し、以下のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input
+InputDataGeneration\Input
 ```
 
 ## 2.8. 鉄道NWデータ
@@ -567,7 +567,7 @@ https://www.jreast-timetable.jp/2402/train/045/047621.html
 最後に、以上の手順で作成したデータを「Rail_NW.csv」、「Rail_Fare_Table.csv」、「Rail_Fare_Dist.csv」として保存し、以下のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input
+InputDataGeneration\Input
 ```
 
 ## 2.9. バス停位置データ
@@ -629,7 +629,7 @@ GTFSは各データを整備している自治体や事業者のホームペー�
 最後に、以上の手順で作成したデータを「Bus_Stop.csv」として保存し、以下のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input
+InputDataGeneration\Input
 ```
 
 ## 2.10. バスNWデータ
@@ -709,7 +709,7 @@ GTFSデータのダウンロードは[バス停位置データ](#29-バス停位
 最後に、以上の手順で作成したデータを「Bus_NW.csv」、「Bus_Fare.csv」として保存し、以下のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input
+InputDataGeneration\Input
 ```
 
 ## 2.11. 国勢調査メッシュ別人口データ
@@ -731,7 +731,7 @@ InputDataGeneration\InputDataGeneration\Input
 ダウンロードしたファイルを解凍し、下記のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input\pop_mesh
+InputDataGeneration\Input\pop_mesh
 ```
 
 ## 2.12. 250mメッシュポリゴンデータ
@@ -751,7 +751,7 @@ InputDataGeneration\InputDataGeneration\Input\pop_mesh
 ダウンロードしたファイルを解凍し、下記のフォルダーに配置する。この際、shpファイルのほか、dbf、prj、shxファイルもフォルダー内に配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input\zone_mesh
+InputDataGeneration\Input\zone_mesh
 ```
 
 ## 2.13. 国勢調査世帯類型別人口データ
@@ -810,7 +810,7 @@ age、gender、family、pop以外の列を削除する。<br>
 最後に、family列が「0」の行を削除した上で、シートを「Population_GenderAgeFamily.csv」として保存し、以下のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input
+InputDataGeneration\Input
 ```
 
 ## 2.14. 地価データ
@@ -834,5 +834,5 @@ InputDataGeneration\InputDataGeneration\Input
 以下のフォルダーに配置する。
 
 ```
-InputDataGeneration\InputDataGeneration\Input
+Simulation\BaseData\Input
 ```
