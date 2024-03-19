@@ -399,7 +399,7 @@
 <p>shpファイル形式で出力する。小地域ポリゴンのレイヤを右クリックして、エクスポートし、新規ファイルに地物を保存を選択する。形式は「ESRI Shapefile」、ファイル名は「Zone_Polygon.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。<br>
 <img src="../resources/02data_preparation/01image18.png"></p>
 <p>以上の手順で作成したデータを、以下のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input
+<pre><code>InputDataGeneration\Input
 </code></pre>
 <h2 id="25-施設ポイントデータ">2.5. 施設ポイントデータ</h2>
 <h3 id="251-作成するデータ">2.5.1. 作成するデータ</h3>
@@ -484,7 +484,7 @@
 <p>同様の手順で、病院、診療所、小学校、中学校、幼稚園こども園についても作成する。</p>
 <p>病院は、医療機関（ポイント）データのうち、「P04_001」列が「1」のデータを用いる。診療所は、医療機関（ポイント）データのうち、「P04_001」列が「2」のデータを用いる。小学校は、学校（ポイント）データのうち、「P29_003」列が「16001」のデータを用いる。中学校は、学校（ポイント）データのうち、「P29_003」列が「16002」のデータを用いる。幼稚園こども園は、学校（ポイント）データのうち、「P29_003」列が「16011」・「16013」のデータを用いる。なお、これらの列名やコードは、各データの仕様が変更されればこの通りではなくなるため、ダウンロードするデータの仕様を確認しながら適切に選択されたい。Facility_type列は、1:図書館,2:病院,3:診療所,4:小学校,5:中学校,6:幼稚園こども園となるように値を入力する。</p>
 <p>最後に、以上の手順で作成したデータをExcel上で縦に結合し、「Facility_Point.csv」として保存し、以下のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input
+<pre><code>InputDataGeneration\Input
 </code></pre>
 <h2 id="26-道路nwデータ">2.6. 道路NWデータ</h2>
 <h3 id="261-作成するデータ">2.6.1. 作成するデータ</h3>
@@ -802,7 +802,7 @@ END
 <img src="../resources/02data_preparation/02image28.png">
 <p>上記NWデータを、shpファイル形式で出力する。Road_NWのレイヤを右クリックし、エクスポート(x)－新規ファイルに地物を保存(A)を選択する。形式は「ESRI Shapefile」、ファイル名は「Road_NW.shp」、座標参照系はEPSG:6697、文字コードはShift_JISを選択する。以上の設定を終えたら、OKボタンを押す。</p>
 <p>以下のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input
+<pre><code>InputDataGeneration\Input
 </code></pre>
 <h2 id="27-鉄道駅位置データ">2.7. 鉄道駅位置データ</h2>
 <h3 id="271-作成するデータ">2.7.1. 作成するデータ</h3>
@@ -934,7 +934,7 @@ END
 <p>※「＊」が付いている項目は空欄でもプログラム実行可能</p>
 <img src="../resources/02data_preparation/01image37.png">
 <p>最後に、以上の手順で作成したデータを「Rail_Station.csv」として保存し、以下のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input
+<pre><code>InputDataGeneration\Input
 </code></pre>
 <h2 id="28-鉄道nwデータ">2.8. 鉄道NWデータ</h2>
 <h3 id="281-作成するデータ">2.8.1. 作成するデータ</h3>
@@ -1263,7 +1263,7 @@ END
 </table>
 <p>※「＊」が付いている項目は空欄でもプログラム実行可能</p>
 <p>最後に、以上の手順で作成したデータを「Rail_NW.csv」、「Rail_Fare_Table.csv」、「Rail_Fare_Dist.csv」として保存し、以下のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input
+<pre><code>InputDataGeneration\Input
 </code></pre>
 <h2 id="29-バス停位置データ">2.9. バス停位置データ</h2>
 <h3 id="291-作成するデータ">2.9.1. 作成するデータ</h3>
@@ -1383,7 +1383,7 @@ END
 <p>なお、GTFSはTXT形式でデータが整備されているが、カンマ区切りのCSVとしてファイルを開くことが可能である。例えば、ExcelではTXT形式のままファイルを開こうとすると、以下のようなダイアログが表示されるが、「カンマやタブなどの区切り文字によってフィールドごとに区切られたデータ」を選択し、区切り文字に「カンマ」を指定することで、ファイルを開くことができる。<br>
 <img src="../resources/02data_preparation/01image43.png"></p>
 <p>最後に、以上の手順で作成したデータを「Bus_Stop.csv」として保存し、以下のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input
+<pre><code>InputDataGeneration\Input
 </code></pre>
 <h2 id="210-バスnwデータ">2.10. バスNWデータ</h2>
 <h3 id="2101-作成するデータ">2.10.1. 作成するデータ</h3>
@@ -1624,7 +1624,7 @@ END
 <p>なお、stop_times.txtにはroute_idの情報が付与されておらず、trips.txt（下図参照）にtrip_idとroute_idの対応が整理されているため、参照して付与する。<br>
 <img src="../resources/02data_preparation/01image45.png"></p>
 <p>最後に、以上の手順で作成したデータを「Bus_NW.csv」、「Bus_Fare.csv」として保存し、以下のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input
+<pre><code>InputDataGeneration\Input
 </code></pre>
 <h2 id="211-国勢調査メッシュ別人口データ">2.11. 国勢調査メッシュ別人口データ</h2>
 <h3 id="2111-作成するデータ">2.11.1. 作成するデータ</h3>
@@ -1635,7 +1635,7 @@ END
 <h3 id="2113-データ整備方法">2.11.3. データ整備方法</h3>
 <p><a href="https://www.e-stat.go.jp/">e-Stat</a>より、シミュレーション対象範囲を含むすべての令和2年国勢調査の「人口及び世帯」の<a href="https://www.e-stat.go.jp/gis/statmap-search?page=1&amp;type=1&amp;toukeiCode=00200521&amp;toukeiYear=2020&amp;aggregateUnit=Q&amp;serveyId=Q002005112020&amp;statsId=T001102">5次メッシュ（250mメッシュ）データ</a>をダウンロードする。
 ダウンロードしたファイルを解凍し、下記のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input\pop_mesh
+<pre><code>InputDataGeneration\Input\pop_mesh
 </code></pre>
 <h2 id="212-250mメッシュポリゴンデータ">2.12. 250mメッシュポリゴンデータ</h2>
 <h3 id="2121-作成するデータ">2.12.1. 作成するデータ</h3>
@@ -1645,7 +1645,7 @@ END
 <h3 id="2123-データ整備方法">2.12.3. データ整備方法</h3>
 <p><a href="https://www.e-stat.go.jp/">e-Stat</a>より、シミュレーション対象範囲を含むすべての<a href="https://www.e-stat.go.jp/gis/statmap-search?page=1&amp;type=2&amp;aggregateUnitForBoundary=Q&amp;coordsys=1&amp;format=shape">5次メッシュ（250mメッシュ）のゾーンポリゴンのデータ</a>をダウンロードする。</p>
 <p>ダウンロードしたファイルを解凍し、下記のフォルダーに配置する。この際、shpファイルのほか、dbf、prj、shxファイルもフォルダー内に配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input\zone_mesh
+<pre><code>InputDataGeneration\Input\zone_mesh
 </code></pre>
 <h2 id="213-国勢調査世帯類型別人口データ">2.13. 国勢調査世帯類型別人口データ</h2>
 <h3 id="2131-作成するデータ">2.13.1. 作成するデータ</h3>
@@ -1721,7 +1721,7 @@ END
 <img src="../resources/02data_preparation/01image51.png"><br>
 <img src="../resources/02data_preparation/01image52.png"></p>
 <p>最後に、family列が「0」の行を削除した上で、シートを「Population_GenderAgeFamily.csv」として保存し、以下のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input
+<pre><code>InputDataGeneration\Input
 </code></pre>
 <h2 id="214-地価データ">2.14. 地価データ</h2>
 <h3 id="2141-作成するデータ">2.14.1. 作成するデータ</h3>
@@ -1733,7 +1733,7 @@ END
 <p>シミュレーション対象とする範囲が含まれる、「地価公示（ポイント）」、「都道府県地価調査（ポイント）」のデータをダウンロードする。</p>
 <p>ファイル名については、「地価公示（ポイント）」は「L01-20.shp」、「都道府県地価調査（ポイント）」は「L02-20.shp」とする。xml、dbf、prj、shxファイルについても、同様にファイル名を変更する。</p>
 <p>以下のフォルダーに配置する。</p>
-<pre><code>InputDataGeneration\InputDataGeneration\Input
+<pre><code>Simulation\BaseData\Input
 </code></pre>
 
 </article>
