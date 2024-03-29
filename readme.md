@@ -131,7 +131,7 @@
 ## 10. 参考資料
 
 - 技術検証レポート: https://www.mlit.go.jp/plateau/file/libraries/doc/plateau_tech_doc_0077_ver01.pdf
-- PLATEAU WebサイトのUse Caseページ「都市構造シミュレーション」: https://www.mlit.go.jp/plateau/use-case/uc23-07/
+- PLATEAU WebサイトのUse Caseページ「都市構造シミュレーションv2.0」: https://www.mlit.go.jp/plateau/use-case/uc23-07/
 - anaconda : https://www.anaconda.com/
 - python : https://www.python.org/
 
